@@ -2,8 +2,7 @@
   "name": "projet-cine-delices-back",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "pnpx @biomejs/biome format ./",
@@ -12,7 +11,8 @@
     "lint:fix": "pnpx @biomejs/biome lint --write ./",
     "check": "pnpx @biomejs/biome check ./",
     "check:fix": "pnpx @biomejs/biome check --write ./",
-    "dev": "nodemon index.js"
+    "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts"
+
   },
   "keywords": [],
   "author": "",
