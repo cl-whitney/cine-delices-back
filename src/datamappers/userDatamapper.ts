@@ -1,15 +1,15 @@
-import type { User }  from "../../types/types";
-import { client } from "../client";
+import type { User }  from "../types/types";
+import { client } from "../database/client";
 
 const userDatamapper = {
-    async getOneUser(id: number): Promise<User>{
+    async getUserById(id: number): Promise<User>{
         const query = `SELECT * FROM "user" WHERE id = $1`;
         const values = [id];
         const result = await client.query<User>(query, values)
         return result.rows[0]
     },
 
-    async findByEmail(email: string): Promise<User>{
+    async getUserByEmail(email: string): Promise<User>{
         const query = 'SELECT * FROM "user" WHERE email = $1';
         const values = [email];
         const result = await client.query<User>(query, values)

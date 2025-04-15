@@ -39,4 +39,4 @@ class Scrypt {
     }
 }
 
-export { Scrypt };
+export default Scrypt;
