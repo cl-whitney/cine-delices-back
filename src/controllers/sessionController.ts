@@ -65,15 +65,12 @@ const sessionController = {
             return res.status(400);
         }
         
-        // si mot de passe valide : démarrer session
         // envoie du résultat
-        // démarrer la session
         // effacer le mot de passe de l'objet user
         delete user.password;
         
 
         // * après cette ligne : le user est connecté
-        req.session.user = user.dataValues;
 
         // Generation du token
         const token = generateAuthentificationToken(user)
@@ -89,13 +86,9 @@ const sessionController = {
         
     },
     
-    destroy(req: Request, res: Response): Promise<Response> {
-        delete req.session.user;
-
-        req.session.destroy();
-
-        res.redirect('/');
-    },
-};
+    destroy(_: Request, res: Response): Response {
+        return res.status(200).json({ message: "Déconnexion réussie (client)" });
+      },
+    };
 
 export { sessionController };
