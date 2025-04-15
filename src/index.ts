@@ -17,6 +17,7 @@ app.use(
     ],
   }),
 );
+app.use(express.json());
 
 const port = process.env.PORT || 3000;
 const base_url = process.env.BASE_URL || 'http://localhost';
