@@ -11,14 +11,18 @@
     "lint:fix": "pnpx @biomejs/biome lint --write ./",
     "check": "pnpx @biomejs/biome check ./",
     "check:fix": "pnpx @biomejs/biome check --write ./",
-    "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts"
-
+    "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts",
+    "create:db": "psql -U projet-cine-delices-back < data/create_db.sql",
+    "seed:db": "psql -U projet-cine-delices-back < data/seeding_db.sql",
+    "update:user": "psql -U projet-cine-delices-back < data/update-user-db.sql",
+    "reset:db": "npm run create:db && npm run seed:db && npm run update:user"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.8.0",
   "dependencies": {
+    "@types/pg": "^8.11.13",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "ejs": "^3.1.10",
