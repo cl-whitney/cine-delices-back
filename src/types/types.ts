@@ -1,15 +1,14 @@
 export interface User {
     id: number;
     first_name: string;
-    last_name: string,
-    password: string,
+    last_name: string;
     email: string;
+    password: string;
     role: 'admin' | 'member';
     status: boolean;
-    created_at: Date;
-    updated_at: Date
-
-}
+    created_at: string;
+    updated_at: string | null;
+  }
 
 export interface recipe {
     id: number;
