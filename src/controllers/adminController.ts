@@ -62,7 +62,7 @@ const adminController = {
             res.status(400);
         }
         
-        // Si l'utilisateur n'est pas admin, revoyee le statut 403
+        // Si l'utilisateur n'est pas admin, revoyer le statut 403
         if (user.role !== Role.Admin){
             res.status(403).render('connexion', {
                 errors: 'Accès non autorisé'
@@ -79,7 +79,7 @@ const adminController = {
         // A partir d'ici, l'utilisateur est connecté
         req.session.user = safeUser
 
-        res.redirect('/')
+        res.redirect('/admin')
     },
 
     async logout (req: Request, res: Response, _next: NextFunction): Promise<void>{
@@ -91,7 +91,7 @@ const adminController = {
                 console.error("Erreur lors de la destruction de la session :", err);
                 res.status(500).json({error: 'Erreur interne du serveur'})
             }
-            res.redirect('/')
+            res.redirect('/admin')
         });
     },
 

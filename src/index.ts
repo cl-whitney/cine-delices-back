@@ -1,11 +1,22 @@
 import express from 'express';
 import 'dotenv/config';
+import { join } from 'node:path';
 import cors from 'cors';
 import session from 'express-session';
 import initUserSession from './middlewares/initAdminSession';
 import router from './routers/router';
 
 const app = express();
+
+// Branchement du template engine EJS
+app.set('view engine', 'ejs');
+// Définition du dossier contenant les fichiers EJS
+app.set('views', join(__dirname, '/views'));
+// Définition du dossier contenant les fichiers statiques (CSS, JS, images...)
+app.use(express.static(join(__dirname, 'public')));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Liste des URL autorisées
 app.use(
@@ -37,8 +48,6 @@ app.use(initUserSession);
 
 // Branchement du router
 app.use(router);
-
-app.use(express.json());
 
 // Lancement du server
 
