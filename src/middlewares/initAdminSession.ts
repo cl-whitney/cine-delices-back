@@ -1,10 +1,11 @@
 import type {NextFunction, Request, Response } from "express";
+import type { Role } from '../types/types';
 
 // Extension de l'interface SessionData pour ajouter un champ user
 // Permet d'accéder à req.session.user sans erreur TypeScript
 declare module "express-session" {
     interface SessionData {
-      user?: { last_name: string; email: string, role: string };
+      user?: { last_name: string; email: string, role: Role };
     }
   }
 

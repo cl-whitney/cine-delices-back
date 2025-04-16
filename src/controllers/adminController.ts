@@ -87,12 +87,14 @@ const adminController = {
     },
 
     async show (req: Request, res: Response, _next: NextFunction): Promise<void>{
-        if (!req.session.user || !Role.Admin){
+         // Vérifie si l'utilisateur est connecté et a le rôle Admin
+        if (!req.session.user || req.session.user.role !== Role.Admin) {
+            // Si l'utilisateur n'est pas connecté ou n'est pas un Admin, on renvoie une erreur 403
             return res.status(403).render('connexion', {
                 errors: ['Email ou mot de passe incorrect ou accès non autorisé'],
             });
-            res.render('back-office')
         }
+        res.render('back-office')
         
     },
 
