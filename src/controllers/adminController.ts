@@ -49,7 +49,7 @@ const adminController = {
 
         let ok = false;
         if (user) {
-            ok = Scrypt.compare(password, user.password);
+            ok = await Scrypt.compare(password, user.password);
         }
 
         // const isOk = await bcrypt.compare(password, user.password);
@@ -83,7 +83,7 @@ const adminController = {
         // A partir d'ici, l'utilisateur est connecté
         req.session.user = safeUser
 
-        res.redirect('/administration')
+        res.redirect('/admin/administration')
     },
 
     async show (req: Request, res: Response, _next: NextFunction): Promise<void>{

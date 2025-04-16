@@ -19,6 +19,13 @@
         <input type="password" id="password" name="password" placeholder="*********">
     
         <input type="submit" value="Se connecter">
+        <% if (errors && errors.length > 0) { %>
+            <ul>
+                <% errors.forEach(function(error) { %>
+                    <li><%= error %></li>
+                <% }); %>
+            </ul>
+        <% } %>
     </form>
 </main>
 
