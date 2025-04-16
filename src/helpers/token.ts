@@ -1,5 +1,5 @@
-import jwt, { Algorithm } from 'jsonwebtoken'; 
 import crypto from 'node:crypto';
+import jwt, { type Algorithm } from 'jsonwebtoken'; 
 import auth from '../helpers/jwt.config'; 
 
 // On extrait les paramètres de la config
@@ -14,7 +14,7 @@ const algorithm = auth.accessToken.algorithm as Algorithm;
  * Génére un token d'authentification à partir d'un utilisateur
  * Retourne un objet contenant : le token, son type, sa date d'expiration
  */
-export function generateToken(user: { id: number; email: string }) {
+export function generateAuthentificationToken(user: { id: number; email: string }) {
   const payload = {
     id: user.id,
     email: user.email,
@@ -49,8 +49,7 @@ export function verifyJwtToken(token: string) {
     return jwt.verify(token, secret, {
       algorithms: [algorithm], // ✅ doit être un tableau
     });
-  } catch (error) {
-    console.error(error);
+  } catch (_error) {
     return null;
   }
 }
