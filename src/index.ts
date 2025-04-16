@@ -3,7 +3,6 @@ import 'dotenv/config';
 import cors from 'cors';
 import router from './routers/router';
 
-
 const app = express();
 
 // Liste des URL autorisées
@@ -19,17 +18,17 @@ app.use(
     ],
   }),
 );
-
 // Branchement du router
 app.use(router)
 
 app.use(express.json());
 
 // Lancement du server
+
 const port = process.env.PORT || 3000;
 const base_url = process.env.BASE_URL || 'http://localhost';
 
 app.listen(port, () => {
   // biome-ignore lint/suspicious/noConsole: <explanation>
-  console.log(`Server listening on ${base_url}:${port}`);
+  console.log(`Listening on ${base_url}:${port}`);
 });
