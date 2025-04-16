@@ -1,13 +1,32 @@
+enum Role {
+    Invalide = 0,
+    Admin = 1,
+    Member = 2
+}
+
+enum Difficulty {
+    Invalide = 0,
+    Facile = 1,
+    Moyen = 2,
+    Difficile = 3
+}
+
+enum Cost {
+    PetitBudget = 1,
+    RapportQualitePrix = 2,
+    Couteux = 3
+}
+
 export interface User {
     id: number;
     first_name: string;
     last_name: string;
     email: string;
     password: string;
-    role: 'admin' | 'member';
+    role: Role;
     status: boolean;
-    created_at: string;
-    updated_at: string | null;
+    created_at: Date;
+    updated_at?: Date;
   }
 
 export interface recipe {
@@ -17,8 +36,8 @@ export interface recipe {
     description: string;
     instruction: string;
     duration: string;
-    difficulty: 'Facile' | 'Moyen' | 'Difficile';
-    cost: 'Petit budget' | 'Rapport qualité prix' | 'Couteux';
+    difficulty: Difficulty;
+    cost: Cost;
     user_id: number;
     status: boolean;
     created_at: Date;

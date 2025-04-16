@@ -1,13 +1,13 @@
 // ICI
-import { Request, Response} from "express";
-import Scrypt from "../helpers/scrypt";
+import type { Request, Response} from "express";
 import userDatamapper  from "../datamappers/userDatamapper";
+import Scrypt from "../helpers/scrypt";
 import validateEmail from '../helpers/validateEmail';
 
 const registerController = { 
     async signup(req: Request, res: Response): Promise<Response> {
         // Verifier les champs
-        let { first_name, last_name, email, password } = req.body;
+        const { first_name, last_name, email, password } = req.body;
         const errors = [];
         if (!first_name) {
             errors.push('Le champ firstname est obligatoire');
@@ -31,7 +31,7 @@ const registerController = {
 
         const user = await userDatamapper.getUserByEmail(email);
         if (user){
-            return res.status(409).json({ message: 'Email non autorisé'})
+            return res.status(401).json({ message: 'Email non autorisé'})
         }
 
         //ICI
