@@ -1,17 +1,17 @@
-enum Role {
+export enum Role {
     Invalide = 0,
     Admin = 1,
     Member = 2
 }
 
-enum Difficulty {
+export enum Difficulty {
     Invalide = 0,
     Facile = 1,
     Moyen = 2,
     Difficile = 3
 }
 
-enum Cost {
+export enum Cost {
     PetitBudget = 1,
     RapportQualitePrix = 2,
     Couteux = 3

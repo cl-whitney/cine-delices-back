@@ -1,6 +1,8 @@
 import express from 'express';
 import 'dotenv/config';
 import cors from 'cors';
+import session from 'express-session';
+import initUserSession from './middlewares/initAdminSession';
 import router from './routers/router';
 
 const app = express();
@@ -18,8 +20,23 @@ app.use(
     ],
   }),
 );
+// Paramètre de session
+app.use(session({
+  secret: process.env.SESSION_SECRET as string,
+  resave: false, // si true sesssion enregistrée en bdd à chaque requête
+  saveUninitialized: false,
+  cookie: {
+    secure: false, // a passer en true en https et en prod
+    maxAge: 1000*60*60,
+    httpOnly: true, // rend inaccessible depuis JS côté client (protection contre les attaques XSS)
+  }
+
+}));
+
+app.use(initUserSession);
+
 // Branchement du router
-app.use(router)
+app.use(router);
 
 app.use(express.json());
 

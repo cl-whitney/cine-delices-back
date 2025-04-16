@@ -1,5 +1,5 @@
-import type { User }  from "../types/types";
 import { client } from "../database/client";
+import type { User }  from "../types/types";
 
 const userDatamapper = {
     async getUserById(id: number): Promise<User>{
