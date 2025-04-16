@@ -14,8 +14,7 @@
     "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts",
     "create:db": "psql -U projet-cine-delices-back < data/create_db.sql",
     "seed:db": "psql -U projet-cine-delices-back < data/seeding_db.sql",
-    "update:user": "psql -U projet-cine-delices-back < data/update-user-db.sql",
-    "reset:db": "npm run create:db && npm run seed:db && npm run update:user"
+    "reset:db": "npm run create:db && npm run seed:db"
   },
   "keywords": [],
   "author": "",

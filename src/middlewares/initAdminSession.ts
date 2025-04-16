@@ -4,7 +4,7 @@ import type {NextFunction, Request, Response } from "express";
 // Permet d'accéder à req.session.user sans erreur TypeScript
 declare module "express-session" {
     interface SessionData {
-      user?: { last_name: string; email: string };
+      user?: { last_name: string; email: string, role: string };
     }
   }
 
