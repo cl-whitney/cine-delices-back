@@ -2,7 +2,6 @@ import { client } from "../database/client";
 import type { Recipe }  from "../types/types";
 import type { Difficulty } from "../types/types";
 import type { Cost } from "../types/types";
-// Import autres
 import type { Category } from "../types/types";
 import type { Quantity } from "../types/types";
 import type { Media } from "../types/types";
@@ -16,14 +15,14 @@ const recipeDatamapper = {
     },
 
     async getAllRecipes(): Promise<Recipe[]> {
-        const query = 'SELECT * FROM recipe';
+        const query = 'SELECT * FROM recipe WHERE status= true';
         const result = await client.query<Recipe>(query);
         return result.rows;
     },
 
     async getAllRecipeByCategory(categoryId: number): Promise<Recipe[]> {
         const query = `SELECT * FROM recipe WHERE id IN (
-                          SELECT recipe_id FROM category WHERE id = $1
+                          SELECT recipe_id FROM category WHERE id = $1 AND status= true
                        )`;
         const values = [categoryId];
         const result = await client.query<Recipe>(query, values);
@@ -88,6 +87,7 @@ const recipeDatamapper = {
                    WHERE id=$12 
                    RETURNING *`,
             values: [
+                data.id,
                 data.title,
                 data.image,
                 data.description,
