@@ -107,10 +107,24 @@ const recipeDatamapper = {
         return result.rows[0];
     },
 
-    async removeRecipe(id: number): Promise<Recipe> {
-        const query = 'DELETE FROM recipe WHERE id = $1 RETURNING *';
-        const values = [id];
-        const result = await client.query<Recipe>(query, values);
+    async removeRecipe(id: number): Promise<Recipe | null> {
+        const query = {
+          text: `
+            UPDATE recipe
+            SET status     = $1,
+                updated_at = $2
+            WHERE id = $3
+            RETURNING *
+          `,
+          values: [
+            false,
+            new Date().toISOString(),      
+            id
+          ]
+        };
+      
+        const result = await client.query<Recipe>(query);
+
         return result.rows[0];
     }
 
