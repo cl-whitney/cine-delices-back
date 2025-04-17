@@ -15,10 +15,10 @@ const recipeDatamapper = {
         return result.rows[0];
     },
 
-    async getAllRecipes(): Promise<Recipe> {
+    async getAllRecipes(): Promise<Recipe[]> {
         const query = 'SELECT * FROM recipe';
         const result = await client.query<Recipe>(query);
-        return result.rows[0];
+        return result.rows;
     },
 
     async getAllRecipeByCategory(categoryId: number): Promise<Recipe[]> {
