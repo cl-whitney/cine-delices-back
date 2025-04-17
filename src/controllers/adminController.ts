@@ -52,7 +52,6 @@ const adminController = {
         }
 
         // const isOk = await bcrypt.compare(password, user.password);
-        // console.log(isOk);
         if (!ok) {
             errors.push('Email ou mot de passe incorrect');
         }
@@ -68,7 +67,7 @@ const adminController = {
         
         // biome-ignore lint/suspicious/noConsole: <explanation>
         console.log('Objet user:', {user})
-        
+
         // Vérifie si l'utilisateur existe et s'il a le rôle d'administrateur
         // Si aucun utilisateur n'est trouvé OU si son rôle n'est pas "Admin"
         // Alors on retourne une erreur 403 et on affiche la page de connexion avec un message d'erreur
