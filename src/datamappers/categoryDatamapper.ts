@@ -2,7 +2,7 @@ import { client } from "../database/client";
 import type { Category } from "../types/types";
 
 const categoryDatamapper = {
-    async getRecipeById(id: number): Promise<Category>{
+    async getCategoryById(id: number): Promise<Category>{
         const query = `SELECT * FROM "category" WHERE id = $1 WHERE status= true`;
         const values = [id];
         const result = await client.query<Category>(query, values);
@@ -21,7 +21,7 @@ const categoryDatamapper = {
         updated_at?: Date;
     }): Promise<Category> {
         const query = {
-            text: `INSERT INTO Category (name, updated_at) 
+            text: `INSERT INTO category (name, updated_at) 
                    VALUES ($1, $2) 
                    RETURNING *;`,
             values: [
@@ -41,7 +41,7 @@ const categoryDatamapper = {
         updated_at?: Date;
     }): Promise<Category> {
         const query = {
-            text: `UPDATE Category 
+            text: `UPDATE category 
                    SET name=$1, updated_at=$2 
                    WHERE id=$3
                    RETURNING *`,
@@ -56,10 +56,24 @@ const categoryDatamapper = {
         return result.rows[0];
     },
 
-    async removeCategory(id: number): Promise<Category> {
-        const query = 'DELETE FROM Category WHERE id = $1 RETURNING *';
-        const values = [id];
-        const result = await client.query<Category>(query, values);
+    async removeCategory(id: number): Promise<Category | null> {
+        const query = {
+          text: `
+            UPDATE category
+            SET status     = $1,
+                updated_at = $2
+            WHERE id = $3
+            RETURNING *
+          `,
+          values: [
+            false,
+            new Date().toISOString(),      
+            id
+          ]
+        };
+      
+        const result = await client.query<Category>(query);
+
         return result.rows[0];
     }
 

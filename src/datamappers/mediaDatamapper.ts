@@ -87,16 +87,25 @@ const mediaDatamapper = {
       return result.rows[0];
     },
   
-    async removeMedia(id: number): Promise<Media> {
-      const query = `
-        DELETE FROM media
-        WHERE id = $1
-        RETURNING *
-      `;
-      const values = [id];
-      const result = await client.query<Media>(query, values);
+    async removeMedia(id: number): Promise<Media | null> {
+      const query = {
+        text: `
+          UPDATE media
+          SET status     = $1,
+              updated_at = $2
+          WHERE id = $3
+          RETURNING *
+        `,
+        values: [
+          false,
+          new Date().toISOString(),      
+          id
+        ]
+      };
+    
+      const result = await client.query<Media>(query);
+
       return result.rows[0];
-    },
-  };
-  
+  },
+}
   export default mediaDatamapper
