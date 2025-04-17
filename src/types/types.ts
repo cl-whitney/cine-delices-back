@@ -1,6 +1,7 @@
 export enum Role {
-    Invalide = 0,
+    Invalide = 'invalide',
     Admin = 'admin',
+    
     Member = 'member'
 }
 

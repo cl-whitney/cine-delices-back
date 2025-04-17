@@ -10,7 +10,8 @@ const adminController = {
         // Recupère MDP et Email
         const { email, password } = req.body;
         const errors = [];
-        
+        // biome-ignore lint/suspicious/noConsole: <explanation>
+        console.log("password:", password)
         // validation password
         const schema = new passwordValidator();
         schema
@@ -50,7 +51,8 @@ const adminController = {
         if (user) {
             ok = await Scrypt.compare(password, user.password);
         }
-
+        // biome-ignore lint/suspicious/noConsole: <explanation>
+        console.log(password)
         // const isOk = await bcrypt.compare(password, user.password);
         if (!ok) {
             errors.push('Email ou mot de passe incorrect');
