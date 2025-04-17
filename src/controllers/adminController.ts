@@ -68,6 +68,7 @@ const adminController = {
         
         // biome-ignore lint/suspicious/noConsole: <explanation>
         console.log('Objet user:', {user})
+        
         // Vérifie si l'utilisateur existe et s'il a le rôle d'administrateur
         // Si aucun utilisateur n'est trouvé OU si son rôle n'est pas "Admin"
         // Alors on retourne une erreur 403 et on affiche la page de connexion avec un message d'erreur
@@ -91,17 +92,17 @@ const adminController = {
         res.redirect('/admin/administration')
     },
 
-    async show (_req: Request, res: Response, _next: NextFunction): Promise<void>{
-         // Vérifie si l'utilisateur est connecté et a le rôle Admin
-        // if (!req.session.user || req.session.user.role) {
-        //     // Si l'utilisateur n'est pas connecté ou n'est pas un Admin, on renvoie une erreur 403
-        //     return res.status(403).render('connexion', {
-        //         errors: ['Email ou mot de passe incorrect ou accès non autorisé'],
-        //     });
-        // }
-        res.render('back-office')
+    // async show (_req: Request, res: Response, _next: NextFunction): Promise<void>{
+    //      // Vérifie si l'utilisateur est connecté et a le rôle Admin
+    //     if (user.role !== Role.Admin) {
+    //         // Si l'utilisateur n'est pas connecté ou n'est pas un Admin, on renvoie une erreur 403
+    //         return res.status(403).render('connexion', {
+    //             errors: ['Email ou mot de passe incorrect ou accès non autorisé'],
+    //         });
+    //     }
+    //     res.render('back-office')
         
-    },
+    // },
 
     async logout (req: Request, res: Response, _next: NextFunction): Promise<void>{
         req.session.user = undefined;
