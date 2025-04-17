@@ -1,12 +1,12 @@
-import { scryptSync, timingSafeEqual, randomBytes } from 'node:crypto';
+import { randomBytes, scryptSync, timingSafeEqual } from 'node:crypto';
 
-class Scrypt {
+const Scrypt = {
     /**
      * Hash un mot de passe en utilisant scrypt avec un salt aléatoire.
      * @param password - Le mot de passe en clair.
      * @returns Le hash au format `${hash}.${salt}`
      */
-    static hash(password: string): string {
+    hash(password: string): string {
         const salt = randomBytes(16).toString('hex');
         const buf = scryptSync(password, salt, 64, {
             N: 131072,
@@ -14,7 +14,7 @@ class Scrypt {
         });
 
         return `${buf.toString('hex')}.${salt}`;
-    }
+    },
 
     /**
      * Compare un mot de passe en clair avec un hash.
@@ -22,7 +22,7 @@ class Scrypt {
      * @param hash - Le hash à comparer (format `${hash}.${salt}`).
      * @returns true si les mots de passe correspondent, sinon false.
      */
-    static compare(plainTextPassword: string, hash: string): boolean {
+    compare(plainTextPassword: string, hash: string): boolean {
         const [hashedPassword, salt] = hash.split('.');
         if (!hashedPassword || !salt) {
             return false;

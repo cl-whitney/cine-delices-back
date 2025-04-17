@@ -1,27 +1,39 @@
 <!DOCTYPE html>
+<html lang="fr">
 <head>
     <!-- Meta tags -->
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Tab title -->
     <title>Ciné Déciles</title>
 </head>
+<body>
 
 <main>
     <form action="/admin/connexion" method="POST">
-        <label  for="email">Email</label>
-        <input  type="email" id="email" name="email" placeholder="email@domain.com">
-    
-        <label for="password">Mot de passe</label>
-        <input type="password" id="password" name="password" placeholder="*********">
-    
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" placeholder="email@domain.com" required>
+
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" placeholder="*********" required>
+
         <input type="submit" value="Se connecter">
+
+        <% if (errors && errors.length > 0) { %>
+            <ul>
+                <% errors.forEach(function(error) { %>
+                    <li><%= error %></li>
+                <% }); %>
+            </ul>
+        <% } %>
     </form>
 </main>
 
 <footer>
-
+    <!-- Contenu du pied de page -->
 </footer>
+
+</body>
+</html>

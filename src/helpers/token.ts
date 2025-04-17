@@ -33,7 +33,7 @@ export function generateAuthentificationToken(user: { id: number; email: string 
 // Signe le payload pour créer un JWT (renvoie une string JWT)
 export function generateJwtToken(payload: object): string {
   return jwt.sign(payload, secret, {
-    algorithm, // ✅ bien typé comme Algorithm
+    algorithm,
     audience,
     expiresIn,
     issuer,
