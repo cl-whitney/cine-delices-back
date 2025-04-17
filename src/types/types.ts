@@ -1,7 +1,7 @@
 export enum Role {
     Invalide = 0,
-    Admin = 1,
-    Member = 2
+    Admin = 'admin',
+    Member = 'member'
 }
 
 export enum Difficulty {

@@ -1,8 +1,8 @@
 -- USERS (restent à 2)
 INSERT INTO "user" (first_name, last_name, password, email, role)
 VALUES 
-('Alice', 'Dupont', 'hashed_pwd1', 'alice@example.com', 'member'),
-('Bob', 'Martin', ' MonSuperMdpAdmin123!', 'bob@example.com', 'admin');
+('Alice', 'Dupont', 'Monmdp123', 'alice@example.com', 'member'),
+('Bob', 'Martin', 'MonSuperMdpAdmin123!', 'admin@cine-delice.local', 'admin');
 
 -- RECETTES
 INSERT INTO recipe (title, image, description, instruction, duration, difficulty, cost, user_id)

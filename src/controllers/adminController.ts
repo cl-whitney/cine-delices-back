@@ -3,7 +3,7 @@ import passwordValidator from 'password-validator';
 import adminDatamapper from '../datamappers/adminDatamapper';
 import Scrypt from '../helpers/scrypt';
 import validateEmail from '../helpers/validateEmail';
-
+import { Role } from '../types/types';
 const adminController = {
     async login(req: Request, res: Response, _next: NextFunction): Promise<void> {
 
@@ -60,18 +60,24 @@ const adminController = {
         if (errors.length) {
             res.status(400);
         }
-
+        if (!user){
+          return res.status(403).render('connexion', {
+            errors: ['Vous n\'êtes pas autorisé à acceder à cet espace'],
+        });
+    }
+        
+        // biome-ignore lint/suspicious/noConsole: <explanation>
+        console.log('Objet user:', {user})
         // Vérifie si l'utilisateur existe et s'il a le rôle d'administrateur
         // Si aucun utilisateur n'est trouvé OU si son rôle n'est pas "Admin"
         // Alors on retourne une erreur 403 et on affiche la page de connexion avec un message d'erreur
-        // if (!user || user.role) {
-        //     return res.status(403).render('connexion', {
-        //         errors: ['Email ou mot de passe incorrect ou accès non autorisé'],
-        //     });
-        // }
-
+        if (user.role !== Role.Admin) {
+            return res.status(403).render('connexion', {
+                errors: ['Email ou mot de passe incorrect ou accès non autorisé'],
+            });
+        }
         // biome-ignore lint/suspicious/noConsole: <explanation>
-        console.log(user.role)
+        console.log('Récupère user.role',user.role)
         
         // biome-ignore lint/suspicious/noConsole: <explanation>
         console.log("yes on est connecté")
@@ -85,7 +91,7 @@ const adminController = {
         res.redirect('/admin/administration')
     },
 
-    async show (req: Request, res: Response, _next: NextFunction): Promise<void>{
+    async show (_req: Request, res: Response, _next: NextFunction): Promise<void>{
          // Vérifie si l'utilisateur est connecté et a le rôle Admin
         // if (!req.session.user || req.session.user.role) {
         //     // Si l'utilisateur n'est pas connecté ou n'est pas un Admin, on renvoie une erreur 403
