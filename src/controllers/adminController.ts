@@ -93,19 +93,22 @@ const adminController = {
         res.redirect('/admin/administration')
     },
 
-    // async show (_req: Request, res: Response, _next: NextFunction): Promise<void>{
-    //      // Vérifie si l'utilisateur est connecté et a le rôle Admin
-    //     if (user.role !== Role.Admin) {
-    //         // Si l'utilisateur n'est pas connecté ou n'est pas un Admin, on renvoie une erreur 403
-    //         return res.status(403).render('connexion', {
-    //             errors: ['Email ou mot de passe incorrect ou accès non autorisé'],
-    //         });
-    //     }
-    //     res.render('back-office')
-        
-    // },
+    async show(req: Request, res: Response, _next: NextFunction): Promise<void> {
+        // Récupère l’utilisateur stocké en session
+        const user = req.session.user;
+    
+        // Si pas connecté ou pas admin, on renvoie la page de connexion
+        if (!user || user.role !== Role.Admin) {
+          return res.status(403).render('connexion', {
+            errors: ['Email ou mot de passe incorrect ou accès non autorisé'],
+          });
+        }
+    
+        // Sinon on affiche le back-office
+        res.render('back-office');
+      },
 
-    async logout (req: Request, res: Response, _next: NextFunction): Promise<void>{
+    async adminLogout (req: Request, res: Response, _next: NextFunction): Promise<void>{
         req.session.user = undefined;
         
         req.session.destroy((err)=> {
@@ -114,7 +117,7 @@ const adminController = {
                 console.error("Erreur lors de la destruction de la session :", err);
                 res.status(500).json({error: 'Erreur interne du serveur'})
             }
-            res.redirect('/admin')
+            res.redirect('/admin/connexion')
         });
     },
 

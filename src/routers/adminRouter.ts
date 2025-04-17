@@ -10,13 +10,13 @@ adminRouter.get('/connexion', (_req: Request, res: Response) => {
   });
   
   // Traite la soumission du formulaire de connexion
-  adminRouter.post('/connexion', adminController.login);
+adminRouter.post('/connexion', adminController.login);
   
   // Affiche le back-office (accessible uniquement aux admins)
-  // adminRouter.get('/administration', adminController.show);
+adminRouter.get('/administration', adminController.show);
   
   // Route de déconnexion (logout)
-  adminRouter.post('/deconnexion', adminController.logout);
+adminRouter.post('/deconnexion', adminController.adminLogout);
   
 
 export default adminRouter;
