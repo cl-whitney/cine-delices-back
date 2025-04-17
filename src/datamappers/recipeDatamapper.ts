@@ -107,8 +107,6 @@ const recipeDatamapper = {
         return result.rows[0];
     },
 
-    async showRecipe
-
     async removeRecipe(id: number): Promise<Recipe> {
         const query = 'DELETE FROM recipe WHERE id = $1 RETURNING *';
         const values = [id];
