@@ -1,4 +1,5 @@
-import { type Request, type Response, Router } from 'express';
+import { Router } from 'express';
+import type { Request, Response } from 'express';
 import adminController from '../controllers/adminController';
 
 const adminRouter = Router();
