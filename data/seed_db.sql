@@ -2,7 +2,7 @@
 INSERT INTO "user" (first_name, last_name, password, email, role)
 VALUES 
 ('Alice', 'Dupont', 'hashed_pwd1', 'alice@example.com', 'member'),
-('Bob', 'Martin', 'hashed_pwd2', 'bob@example.com', 'admin');
+('Bob', 'Martin', ' MonSuperMdpAdmin123!', 'bob@example.com', 'admin');
 
 -- RECETTES
 INSERT INTO recipe (title, image, description, instruction, duration, difficulty, cost, user_id)
