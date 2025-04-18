@@ -31,31 +31,34 @@ const recipeDatamapper = {
     
     async createRecipe(data: {
         title: string;
-        image: string;
-        description: string;
+        image?: string;
+        description?: string;
         instruction: string;
         duration: string;
         difficulty: Difficulty;
         cost: Cost;
-        categories?: Category[];
-        ingredients?: Quantity[];
-        media?: Media[];
+        user_id: number;
+        created_at: Date;
+        // category?: Category[];
+        // ingredients?: Quantity[];
+        // media?: Media[];
     }): Promise<Recipe> {
         const query = {
-            text: `INSERT INTO recipe (title, image, description, instruction, duration, difficulty, cost, categories, ingredients, media, updated_at) 
-                   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) 
+            text: `INSERT INTO recipe (title, image, description, instruction, duration, difficulty, cost, user_id, created_at) 
+                   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) 
                    RETURNING *;`,
             values: [
                 data.title,
-                data.image,
-                data.description,
+                data.image ?? null,
+                data.description ?? null,
                 data.instruction,
                 data.duration,
                 data.difficulty,
                 data.cost,
-                data.categories || [],
-                data.ingredients || [],
-                data.media || [],
+                data.user_id,
+                // data.category || [],
+                // data.ingredients || [],
+                // data.media || [],
                 new Date().toISOString()
             ]
         };

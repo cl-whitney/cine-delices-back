@@ -36,7 +36,7 @@ const recipeController = {
     async store(req: Request, res: Response, _next: NextFunction): Promise<void> {
         const data = req.body;
     
-        if (!data || !data.title || data.instruction || data.duration || data.cost) {
+        if (!data || !data.title || !data.instruction || !data.duration || !data.cost) {
             res.status(400).json({ error: "Les données de la recette sont invalides ou incomplètes." });
             return;
         }

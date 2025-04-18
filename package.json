@@ -12,9 +12,10 @@
     "check": "pnpx @biomejs/biome check ./",
     "check:fix": "pnpx @biomejs/biome check --write ./",
     "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts",
-    "create:db": "psql -U projet-cine-delices-back < data/create_db.sql",
-    "seed:db": "psql -U projet-cine-delices-back < data/seeding_db.sql",
-    "reset:db": "npm run create:db && npm run seed:db"
+    "create:db": "psql -U cinedelices < data/create_db.sql",
+    "seed:db": "psql -U cinedelices < data/seed_db.sql",
+    "update:user": "psql -U cinedelices < data/seed-user.sql",
+    "reset:db": "npm run create:db && npm run seed:db && npm run update:user"
   },
   "keywords": [],
   "author": "",
