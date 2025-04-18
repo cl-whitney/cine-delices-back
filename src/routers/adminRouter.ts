@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import type { Request, Response} from 'express';
 import adminController from '../controllers/adminController';
+import isAdmin from '../middlewares/isAdmin'
 
 const adminRouter = Router();
 
@@ -16,7 +17,7 @@ adminRouter.post('/connexion', adminController.login);
 adminRouter.get('/administration', adminController.show);
   
   // Route de déconnexion (logout)
-adminRouter.post('/deconnexion', adminController.adminLogout);
+adminRouter.post('/deconnexion', isAdmin, adminController.adminLogout);
   
 
 export default adminRouter;
