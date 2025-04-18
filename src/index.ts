@@ -3,7 +3,7 @@ import 'dotenv/config';
 import { join } from 'node:path';
 import cors from 'cors';
 import type { } from 'express'
-// import type { NextFunction, Request, Response } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 import session from 'express-session';
 import { errorHandler } from './middlewares/errrosHandlers/handlers';
 import notFound from './middlewares/errrosHandlers/notFound';
@@ -55,12 +55,12 @@ app.use(session({
 app.use(initUserSession);
 
 // biome-ignore lint/complexity/noUselessLoneBlockStatements: <explanation>
-// app.get(
-//   '/',
-//   (_req: Request, res: Response, _next: NextFunction) => {
-//     res.redirect('/admin/connexion');
-//   }
-// );
+app.get(
+  '/',
+  (_req: Request, res: Response, _next: NextFunction) => {
+    res.redirect('/admin/connexion');
+  }
+);
 
 // Branchement du router
 app.use(router);
