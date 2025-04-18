@@ -11,6 +11,7 @@ const recipeController = {
             res.status(404).json({ error: "Recettes introuvables." });
             return;
         }
+        res.json(recipes);
     },
 
     // Affiche une recette
@@ -28,6 +29,7 @@ const recipeController = {
             res.status(404).json({ error: "Recette introuvable." });
             return _next();
         }
+        res.json(recipe);
     },
 
     // Creer une recette

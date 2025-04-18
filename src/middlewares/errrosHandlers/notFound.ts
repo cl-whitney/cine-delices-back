@@ -1,4 +1,4 @@
-import type { Response, Request, NextFunction } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 
 // Définition d'une classe d'erreur personnalisée qui hérite de `Error`
 class HttpError extends Error {
@@ -12,7 +12,7 @@ class HttpError extends Error {
     }
 }
 
-function notFound(req: Request, res: Response, next: NextFunction) {
+function notFound(_req: Request, _res: Response, next: NextFunction) {
     const err = new HttpError("La ressource demandée n'existe pas", 404);
     next(err);
 }

@@ -11,6 +11,7 @@ const ingredientController = {
             res.status(404).json({ error: "Ingredients introuvables." });
             return;
         }
+        res.json(ingredients);
     },
 
     // Affiche un ingredient
@@ -28,6 +29,7 @@ const ingredientController = {
             res.status(404).json({ error: "Ingredient introuvable." });
             return _next();
         }
+        res.json(ingredient);
     },
 
     // Creer une ingredient
