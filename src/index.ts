@@ -3,6 +3,8 @@ import 'dotenv/config';
 import { join } from 'node:path';
 import cors from 'cors';
 import session from 'express-session';
+import { errorHandler } from './middlewares/errrosHandlers/handlers';
+import notFound from './middlewares/errrosHandlers/notFound';
 import initUserSession from './middlewares/initAdminSession';
 import router from './routers/router';
 
@@ -34,23 +36,31 @@ app.use(
 // Paramètre de session
 app.use(session({
   secret: process.env.SESSION_SECRET as string,
-  resave: false, // si true sesssion enregistrée en bdd à chaque requête
+  // si true sesssion enregistrée en bdd à chaque requête
+  resave: false, 
   saveUninitialized: false,
   cookie: {
-    secure: false, // a passer en true en https et en prod
+    // a passer en true en https et en prod
+    secure: false, 
     maxAge: 1000*60*60,
-    httpOnly: true, // rend inaccessible depuis JS côté client (protection contre les attaques XSS)
+    // rend inaccessible depuis JS côté client (protection contre les attaques XSS)
+    httpOnly: true, 
   }
 
 }));
 
+// Initialiser la session Admin
 app.use(initUserSession);
 
 // Branchement du router
 app.use(router);
 
-// Lancement du server
+// notfound middleware
+app.use(notFound);
+// errorHandlers
+app.use(errorHandler);
 
+// Lancement du server
 const port = process.env.PORT || 3000;
 const base_url = process.env.BASE_URL || 'http://localhost';
 
