@@ -12,6 +12,7 @@ const categoryController = {
             res.status(404).json({ error: "Catégories introuvables." });
             return;
         }
+        res.json(categorys);
     },
 
     // Affiche une catégorie
@@ -29,6 +30,7 @@ const categoryController = {
             res.status(404).json({ error: "Catégorie introuvable." });
             return _next();
         }
+        res.json(category);
     },
 
     // Creer une catégorie

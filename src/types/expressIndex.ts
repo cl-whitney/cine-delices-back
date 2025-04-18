@@ -1,3 +1,4 @@
+// biome-ignore lint/correctness/noUnusedImports: <explanation>
 import * as express from 'express';
 
 declare global {
@@ -8,3 +9,4 @@ declare global {
     }
   }
 }
+
