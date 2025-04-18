@@ -39,7 +39,7 @@ const userDatamapper = {
         },
 
     async getUserByEmail(email: string): Promise<User>{
-        const query = 'SELECT * FROM "user" WHERE email = $1 AND WHERE status = true';
+        const query = 'SELECT * FROM "user" WHERE email = $1 AND status = true';
         const values = [email];
         const result = await client.query<User>(query, values)
 

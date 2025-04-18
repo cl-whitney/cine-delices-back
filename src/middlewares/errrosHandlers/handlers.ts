@@ -1,11 +1,12 @@
-import type { Response, Request, NextFunction, RequestHandler, ErrorRequestHandler } from 'express';
+import type { NextFunction, Request, RequestHandler, Response, } from 'express';
 
 
 // * cette fonction doit faire les try catch à la place des méthode de controlleurs
 function catchErrors(funcToExecute: RequestHandler): RequestHandler {
     // * on doit avoir un middleware qui va exécute la méthode du controlleur dans un try catch
     // cette fonction va s'exécuter automatiquement
-    return async function (req : Request, res: Response, next: NextFunction): Promise <void> {
+    // biome-ignore lint/complexity/useArrowFunction: <explanation>
+            return async function (req : Request, res: Response, next: NextFunction): Promise <void> {
         try {
             await funcToExecute( req, res, next);
         } catch (error) {
@@ -21,10 +22,8 @@ interface ServerError extends Error {
 }
 
 // * Un middleware de gestion d'erreurs prend 4 paramètres
-function errorHandler(err: ServerError, req: Request, res: Response, next: NextFunction) {
+function errorHandler(err: ServerError, _req: Request, res: Response, _next: NextFunction) {
     const status = err.statusCode || 500; // Utilisation du code HTTP ou 500 par défaut
-
-    console.error(err); // Log détaillé de l'erreur dans la console
 
     // Réponse structurée en JSON, plus adaptée aux API REST
     res.status(status).json({
