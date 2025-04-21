@@ -6,17 +6,17 @@ export enum Role {
 }
 
 export enum Difficulty {
-    Invalide = 0,
-    Facile = 1,
-    Moyen = 2,
-    Difficile = 3
-}
-
-export enum Cost {
-    PetitBudget = 1,
-    RapportQualitePrix = 2,
-    Couteux = 3
-}
+    Facile    = 'Facile',
+    Moyen     = 'Moyen',
+    Difficile = 'Difficile',
+  }
+  
+  export enum Cost {
+    PetitBudget        = 'Petit budget',
+    RapportQualitePrix = 'Rapport qualité prix',
+    Couteux            = 'Couteux',
+  }
+  
 
 export interface User {
     id: number;
