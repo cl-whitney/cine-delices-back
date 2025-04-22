@@ -11,6 +11,8 @@ const userController = {
             res.status(404).json({ error: "Utilisateurs introuvables." });
             return;
         }
+
+        res.render('user', {users: users})
     },
 
     // Affiche un utilisateur

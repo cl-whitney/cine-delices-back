@@ -1,22 +1,24 @@
 import type { NextFunction, Request, Response } from 'express';
 import passwordValidator from 'password-validator';
 import adminDatamapper from '../datamappers/adminDatamapper';
+import recipeDatamapper from '../datamappers/recipeDatamapper';
 import Scrypt from '../helpers/scrypt';
 import validateEmail from '../helpers/validateEmail';
 import { Role } from '../types/types';
 
-
 const adminController = {
-    async showLoginForm(_req: Request, res: Response, _next:NextFunction){
-        res.render('connexion', { errors: [] })
+    async showLoginForm(_req: Request, res: Response, _next: NextFunction): Promise<void> {
+        res.locals.page = "connexion";
+        res.render("connexion", {page: "connexion", errors: [] });
     },
-
+    
     async login(req: Request, res: Response, _next: NextFunction): Promise<void> {
 
         // Recupère MDP et Email
         const { email, password } = req.body;
         const errors = [];
-
+        // biome-ignore lint/suspicious/noConsole: <explanation>
+        console.log("password:", password)
         // validation password
         const schema = new passwordValidator();
         schema
@@ -56,7 +58,8 @@ const adminController = {
         if (user) {
             ok = await Scrypt.compare(password, user.password);
         }
-        
+        // biome-ignore lint/suspicious/noConsole: <explanation>
+        console.log(password)
         // const isOk = await bcrypt.compare(password, user.password);
         if (!ok) {
             errors.push('Email ou mot de passe incorrect');
@@ -70,6 +73,9 @@ const adminController = {
             errors: ['Vous n\'êtes pas autorisé à acceder à cet espace'],
         });
         };
+        
+        // biome-ignore lint/suspicious/noConsole: <explanation>
+        console.log('Objet user:', {user})
 
         // Vérifie si l'utilisateur existe et s'il a le rôle d'administrateur
         // Si aucun utilisateur n'est trouvé OU si son rôle n'est pas "Admin"
@@ -124,4 +130,96 @@ const adminController = {
 
 };
 
-export default adminController;
+const recipeAdminController ={
+    async index (_req: Request, res:Response, _next: NextFunction):Promise <void>{
+        const recipes = await recipeDatamapper.getAllRecipes()
+        // biome-ignore lint/suspicious/noConsole: <explanation>
+        console.log(recipes)
+        res.render('recipe', { recipes, errors: []})
+    },
+
+}; 
+
+// const _categoryAdminController = {
+//     async index(_req: Request, res: Response, _next:NextFunction): Promise<void> {
+    
+//         const categorys = await categoryDatamapper.getAllCategorys();
+        
+//         if (!categorys) {
+//             res.status(404).json({ error: "Catégories introuvables." });
+//             return;
+//         }
+//         res.render("categories");
+//     },
+
+//     // Affiche une catégorie
+//     async show(req: Request, res: Response, _next:NextFunction): Promise<void> {
+//         const id = Number(req.params.id);
+    
+//         if (!id) {
+//             res.status(400).json({ error: "ID invalide." });
+//             return;
+//         }
+    
+//         const category = await categoryDatamapper.getCategoryById(id);
+        
+//         if (!category) {
+//             res.status(404).json({ error: "Catégorie introuvable." });
+//             return _next();
+//         }
+//         res.render("category-details");
+//     },
+
+//     // Creer une catégorie
+//     async store(req: Request, res: Response, _next: NextFunction): Promise<void> {
+//         const data = req.body;
+    
+//         if (!data || !data.name ) {
+//             res.status(400).json({ error: "Les données de la catégorie sont invalides ou incomplètes." });
+//             return;
+//         }
+    
+//         const category = await categoryDatamapper.createCategory(data);
+    
+//         if (!category) {
+//             res.status(500).json({ error: "Échec de la création de la catégorie." });
+//             return;
+//         }
+    
+//         res.status(201).json({ message: "Catégorie créée avec succès !", category });
+//     },
+
+//     // Mettre à jour une catégorie
+//     async update(req: Request, res: Response, _next: NextFunction): Promise<void> {
+//         const id = Number(req.params.id);
+//         const {name} = req.body;
+
+//         if (!id) {
+//             res.status(400).json({ error: "ID invalide." });
+//             return;
+//         }
+
+//         const category = await categoryDatamapper.getCategoryById(id);
+//         if (!category){
+//             return _next();
+//         }
+//         await categoryDatamapper.updateCategory(name);
+//         res.status(200).json({ message: "Catégorie mise à jour avec succès." })
+//     },
+
+//     // Mettre à jour une catégorie
+//     async destroy(req: Request, res: Response, _next: NextFunction): Promise<void> {
+//         const id = Number(req.params.id);
+
+//         const category = await categoryDatamapper.removeCategory(id);
+
+//         if (!category){
+//             return _next();
+//         }
+//         res.status(200).json({ message: "Catégorie supprimée à jour avec succès." })
+//     },
+
+// };
+
+
+export {adminController, recipeAdminController};

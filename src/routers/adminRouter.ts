@@ -1,6 +1,5 @@
 import { Router } from 'express';
-import type {} from 'express';
-import adminController from '../controllers/adminController';
+import { adminController, recipeAdminController} from '../controllers/adminController';
 import categoryController from '../controllers/categoryController';
 import recipeController from '../controllers/recipeController';
 import userController from '../controllers/userController';
@@ -8,7 +7,6 @@ import { catchErrors } from "../middlewares/errrosHandlers/handlers";
 import isAdmin from '../middlewares/isAdmin'
 
 const adminRouter = Router();
-
 
 // Afficher le formulaire de connexion
 adminRouter.get('/connexion', adminController.showLoginForm);
@@ -23,7 +21,7 @@ adminRouter.get('/administration', isAdmin, adminController.show);
 adminRouter.post('/deconnexion', isAdmin, adminController.adminLogout);
 
 // Gestion des recettes
-adminRouter.get('/recettes', isAdmin, recipeController.index)
+adminRouter.get('/recettes', isAdmin, recipeAdminController.index)
 adminRouter.get('/:id', isAdmin,catchErrors(recipeController.show))
 adminRouter.post('/', isAdmin, catchErrors(recipeController.store))
 adminRouter.patch('/:id', isAdmin, catchErrors(recipeController.update))

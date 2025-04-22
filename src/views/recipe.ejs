@@ -1,0 +1,14 @@
+<%- include ('partials/head') %>
+
+<h1>Recettes</h1>
+
+<% if (locals.recipes?.length) { %>
+    <% recipes.forEach(recipe => {%>
+        <li>
+            <h2>Titre : <%=recipe.title %></h2>
+            <p> Aperçu : <img src=" <%=recipe.image %>" alt="<%=recipe.title %>"></p>
+        </li>
+    <%})%>
+<% } %>
+
+<%- include ('partials/foot') %>
