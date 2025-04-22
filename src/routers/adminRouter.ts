@@ -18,7 +18,7 @@ adminRouter.get('/connexion', (_req: Request, res: Response) => {
 adminRouter.post('/connexion', adminController.login);
   
   // Affiche le back-office (accessible uniquement aux admins)
-adminRouter.get('/administration', adminController.show);
+adminRouter.get('/administration', isAdmin, adminController.show);
   
   // Route de déconnexion (logout)
 adminRouter.post('/deconnexion', isAdmin, adminController.adminLogout);
