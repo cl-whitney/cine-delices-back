@@ -19,6 +19,13 @@ app.set('views', join(__dirname, '/views'));
 // Définition du dossier contenant les fichiers statiques (CSS, JS, images...)
 app.use(express.static(join(__dirname, 'public')));
 
+app.use((_req: Request, res: Response, next: NextFunction) => {
+  res.locals.page = null; // Initialisation de la variable
+  res.locals.recipes = null;
+  next();
+});
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -54,7 +61,6 @@ app.use(session({
 // Initialiser la session Admin
 app.use(initUserSession);
 
-// biome-ignore lint/complexity/noUselessLoneBlockStatements: <explanation>
 app.get(
   '/',
   (_req: Request, res: Response, _next: NextFunction) => {
