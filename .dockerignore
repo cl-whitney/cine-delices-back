@@ -1,0 +1,15 @@
+# Ignore le dossier de données Postgres (volumes)
+pg-data/
+
+# Ne pas ignorer le dossier des scripts SQL
+!data/*.sql
+
+# Ignorer node_modules (ta base de code sert déjà à copier les deps
+node_modules/
+
+# Ignorer Git
+.git
+.gitignore
+
+# Logs
+*.log
