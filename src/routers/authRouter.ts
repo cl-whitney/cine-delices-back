@@ -1,17 +1,12 @@
 import { Router } from 'express';
 import loginController from '../controllers/loginController';
 import registerController from '../controllers/registerController';
+import isAuth from '../middlewares/isAuth';
 
 const authRouter = Router();
 
 authRouter.post('/inscription', registerController.signup);
 authRouter.post('/connexion', loginController.login)
-authRouter.delete('/logout', loginController.logout)
-
-
-// biome-ignore lint/suspicious/noConsole: <explanation>
-console.log(registerController);
-// biome-ignore lint/suspicious/noConsole: <explanation>
-console.log(loginController.logout)
+authRouter.delete('/deconnexion', isAuth, loginController.logout)
 
 export default authRouter

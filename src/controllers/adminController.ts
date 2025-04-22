@@ -4,14 +4,19 @@ import adminDatamapper from '../datamappers/adminDatamapper';
 import Scrypt from '../helpers/scrypt';
 import validateEmail from '../helpers/validateEmail';
 import { Role } from '../types/types';
+
+
 const adminController = {
+    async showLoginForm(_req: Request, res: Response, _next:NextFunction){
+        res.render('connexion', { errors: [] })
+    },
+
     async login(req: Request, res: Response, _next: NextFunction): Promise<void> {
 
         // Recupère MDP et Email
         const { email, password } = req.body;
         const errors = [];
-        // biome-ignore lint/suspicious/noConsole: <explanation>
-        console.log("password:", password)
+
         // validation password
         const schema = new passwordValidator();
         schema
@@ -51,8 +56,7 @@ const adminController = {
         if (user) {
             ok = await Scrypt.compare(password, user.password);
         }
-        // biome-ignore lint/suspicious/noConsole: <explanation>
-        console.log(password)
+        
         // const isOk = await bcrypt.compare(password, user.password);
         if (!ok) {
             errors.push('Email ou mot de passe incorrect');
@@ -65,10 +69,7 @@ const adminController = {
           return res.status(403).render('connexion', {
             errors: ['Vous n\'êtes pas autorisé à acceder à cet espace'],
         });
-    }
-        
-        // biome-ignore lint/suspicious/noConsole: <explanation>
-        console.log('Objet user:', {user})
+        };
 
         // Vérifie si l'utilisateur existe et s'il a le rôle d'administrateur
         // Si aucun utilisateur n'est trouvé OU si son rôle n'est pas "Admin"
