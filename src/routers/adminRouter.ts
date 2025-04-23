@@ -25,8 +25,8 @@ adminRouter.get('/recettes/:id', isAdmin,catchErrors(recipeAdminController.show)
 // adminRouter.delete('/', isAdmin, catchErrors(recipeController.destroy))
 
 // Gestion des catégories
-adminRouter.get('/category', isAdmin, catchErrors(categoryAdminController.index));
-adminRouter.get('/category:id', isAdmin, catchErrors(categoryAdminController.show));
+adminRouter.get('/categories', isAdmin, catchErrors(categoryAdminController.index));
+// adminRouter.get('/category:id', isAdmin, catchErrors(categoryAdminController.show));
 // adminRouter.post('/', isAdmin, catchErrors(categoryController.store));
 // adminRouter.patch('/:id', isAdmin, catchErrors(categoryController.update));
 // adminRouter.delete('/:id', isAdmin, catchErrors(categoryController.destroy));

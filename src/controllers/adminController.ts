@@ -168,13 +168,13 @@ const categoryAdminController={
         const category = await categoryDatamapper.getAllCategorys()
         // biome-ignore lint/suspicious/noConsole: <explanation>
         console.log(category)
-        res.render('category', { category, errors: []})
+        res.render('categories', { category, errors: []})
     },
-    async show(req: Request, res: Response, _next: NextFunction): Promise<void> {
-        const id = Number(req.params.id);
-        const cat = await categoryDatamapper.getCategoryById(id);
-        res.render('category-details', { category: cat, errors: [] });
-      },
+    // async show(req: Request, res: Response, _next: NextFunction): Promise<void> {
+    //     const id = Number(req.params.id);
+    //     const cat = await categoryDatamapper.getCategoryById(id);
+    //     res.render('category-details', { category: cat, errors: [] });
+    //   },
 };
 
 const ingredientAdminController = {
@@ -182,7 +182,7 @@ const ingredientAdminController = {
       const ingredients = await ingredientDatamapper.getAllIngredients();
         // biome-ignore lint/suspicious/noConsole: <explanation>
         console.log(ingredients)
-      res.render('ingredient', { ingredients, errors: [] });
+      res.render('ingredients', { ingredients, errors: [] });
     },
     async show(req: Request, res: Response, _next: NextFunction): Promise<void> {
       const id = Number(req.params.id);
@@ -194,7 +194,7 @@ const ingredientAdminController = {
   const mediaAdminController = {
     async index(_req: Request, res: Response, _next: NextFunction): Promise<void> {
       const medias = await mediaDatamapper.getAllMedias();
-      res.render('media', { medias, errors: [] });
+      res.render('medias', { medias, errors: [] });
     },
     async show(req: Request, res: Response, _next: NextFunction): Promise<void> {
       const id = Number(req.params.id);

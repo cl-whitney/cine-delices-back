@@ -1,0 +1,51 @@
+body{
+    padding: 1rem;
+}
+.header-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-decoration: none;
+}
+
+.header-nav-list{
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-list{
+    display: flex;
+}
+
+h1{
+    font-size: 2rem;
+    font-weight: bold;
+    padding-top: 3rem;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
+    text-decoration: underline;
+    color: brown;
+}
+
+.nav-main-container{
+    display: flex;
+    justify-content: center;
+    padding-top: 5rem;
+}
+
+.link-list-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 3rem;
+}
+
+.link-list{
+    text-decoration: none;
+}

@@ -10,7 +10,7 @@ const ingredientDatamapper = {
     },
 
     async getAllIngredients(): Promise<Ingredient[]> {
-            const query = 'SELECT * FROM category WHERE status=true AND status = true';
+            const query = 'SELECT * FROM ingredient WHERE status=true AND status = true';
             const result = await client.query<Ingredient>(query);
             return result.rows;
         },

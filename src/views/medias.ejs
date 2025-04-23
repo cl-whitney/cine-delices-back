@@ -1,0 +1,17 @@
+<%- include ('partials/head') %>
+
+<h1>Liste des médias</h1>
+
+<% if (locals.medias.length) { %>
+    <% medias.forEach(media => {%>
+        <li>
+            <a href="/admin/medias/<%= media.id %>">
+            <p>Titre : <%=media.title %></P>
+            </a>
+            <p> type : <%= media.type %></p> 
+        </li>
+    <%})%>
+<% } %>
+
+
+<%- include ('partials/foot') %>

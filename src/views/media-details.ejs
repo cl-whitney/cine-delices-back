@@ -1,0 +1,14 @@
+<%- include ('partials/head') %>
+<% if (media) { %>
+    <li>
+        <h2><%= media.title %></h2>
+        <p>type : <%= media.type %></p>
+        <p>description : <%= media.description %></p>
+        <p>recipe_id : <%= media.recipe_id %></p>
+        <p>status : <%= media.difficulty %></p>
+        <p>Crée le: <%= media.created_at %></p>
+        <p>Modifié le : <%= media.updated_at %></p>
+        <a href="/admin/medias">← Retour à la liste</a>
+    </li>
+<% } %>
+<%- include ('partials/foot') %>

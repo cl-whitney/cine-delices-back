@@ -15,6 +15,7 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
+	/* biome-ignore lint/suspicious/noShorthandPropertyOverrides: <explanation> */
 	font: inherit;
 	vertical-align: baseline;
 }
