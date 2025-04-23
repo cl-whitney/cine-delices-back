@@ -1,19 +1,23 @@
 <%- include('partials/head') %>
 
-<h1>Utilisateurs</h1>
+<h1 class="title-page">Utilisateurs</h1>
 
 <% if (locals.users?.length) { %>
-  <% users.forEach(user => { %>
-    <ul>
+  <ul>
+    <% locals.users.forEach(user => { %>
       <li>
-        <h3 style="color: <%= user.role === 'admin' ? 'red' : 'inherit' %>;">
-          Nom : <%= user.last_name %>
-        </h3>
-        <p>Prénom : <%= user.first_name %></p>
-        <p> style Rôle : <%= user.role %></p>
+        <p style="color: <%= user.role === 'admin' ? 'red' : 'inherit' %>;">
+          <strong>Nom :</strong> <%= user.last_name %>
+        </p>
       </li>
-    </ul>
-  <% }) %>
+      <li>
+        <p><strong>Prénom :</strong> <%= user.first_name %></p>
+      </li>
+      <li>
+        <p><strong>Rôle :</strong> <%= user.role %></p>
+      </li>
+    <% }) %>
+  </ul>
 <% } %>
 
 <%- include('partials/foot') %>

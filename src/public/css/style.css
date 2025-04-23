@@ -6,6 +6,7 @@ body{
     flex-direction: row;
     justify-content: space-between;
     text-decoration: none;
+    margin-top: 1rem;
 }
 
 .header-nav-list{
@@ -14,10 +15,10 @@ body{
 }
 
 .nav-list{
-    display: flex;
+    margin-right: 1rem;
 }
 
-h1{
+.title-page{
     font-size: 2rem;
     font-weight: bold;
     padding-top: 3rem;
