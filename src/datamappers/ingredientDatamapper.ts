@@ -36,6 +36,7 @@ const ingredientDatamapper = {
     },
 
     async updateIngredient(data: {
+        id: number,
         name: string,
         unity: string
     }): Promise<Ingredient> {
@@ -48,6 +49,7 @@ const ingredientDatamapper = {
                    values: [
                     data.name,
                     data.unity,
+                    data.id,
                     new Date().toISOString(),
                 ]
         };
