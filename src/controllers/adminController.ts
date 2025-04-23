@@ -134,6 +134,8 @@ const adminController = {
 
 };
 
+// Gestion des recettes : 
+
 const recipeAdminController ={
     async index (_req: Request, res:Response, _next: NextFunction):Promise <void>{
         const recipes = await recipeDatamapper.getAllRecipes()
@@ -148,14 +150,96 @@ const recipeAdminController ={
         res.render('recipe-details', { recipe, errors: [] })
     },
 
-    // async store(req: Request, _res: Response, _next: NextFunction):Promise <void>{
-    //     try {
-    //         const {title, image, description, instrucion, duration, difficulty, cost, user_id, categories, ingredients, media}
-    //         = req.body
-    //         if (!title)
-    //     }}
+    async store(req: Request, res: Response, next: NextFunction):Promise <void>{
+        try {
+            const {title, image, description, instruction, duration, difficulty, cost, user_id, categories, ingredients, media}= req.body
+            
+            if (!title || !instruction || !duration || !difficulty || !cost || !user_id) {
+                return res
+                  .status(400)
+                  .render('admin/recettes', { error: 'Tous les champs obligatoires doivent être remplis.' });
+              }
+        await recipeDatamapper.createRecipe({
+            title,
+            image: image || null,
+            description: description || null,
+            instruction,
+            duration,
+            difficulty,
+            cost,
+            user_id:(user_id),
+            categories,
+            ingredients,
+            media
+        });
 
-}; 
+        res.redirect('/admin/recettes');
+      } catch (err) {
+        next(err);
+      }
+    },
+    async update(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+          const id = Number(req.params.id);
+          const {
+            title,
+            image,
+            description,
+            instruction,
+            duration,
+            difficulty,
+            cost,
+            categories,
+            ingredients,
+            media
+   
+          } = req.body;
+    
+          if (!id || !title || !instruction || !duration || !difficulty || !cost) {
+            return res
+              .status(400)
+              .render('admin/recettes/detail', { error: 'ID et tous les champs obligatoires doivent être fournis.' });
+          }
+    
+          await recipeDatamapper.updateRecipe({
+            id,
+            title,
+            image: image || null,
+            description: description || null,
+            instruction,
+            duration,
+            difficulty,
+            cost,
+            categories,
+            ingredients,
+            media
+
+          });
+    
+          res.redirect('/admin/recettes');
+        } catch (err) {
+          next(err);
+        }
+      },
+
+      async destroy(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+          const id = Number(req.params.id);
+          if (!id) {
+            return res
+              .status(400)
+              .render('admin/recettes/index', { error: 'ID de la recette manquant.' });
+          }
+    
+          await recipeDatamapper.removeRecipe(id);
+          res.redirect('/admin/recettes');
+        } catch (err) {
+          next(err);
+        }
+      },
+    };
+
+// Gestion des Utilisateurs : 
 
 
 const usersAdminController ={
@@ -168,8 +252,39 @@ const usersAdminController ={
         }
         res.render('users', { users, errors: []})
     },
-
-};
+    async update(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+          const id = Number(req.params.id);
+          const { first_name, last_name } = req.body;
+          if (!id || !first_name || !last_name) {
+            res.status(400);
+            res.render('users', { users: [], errors: ['ID, prénom et nom sont requis.'] });
+            return;
+          }
+          await userDatamapper.updateUser({ id, first_name, last_name });
+          res.redirect('/admin/users');
+        } catch (err) {
+          next(err);
+        }
+      },
+    
+      async destroy(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+          const id = Number(req.params.id);
+          if (!id) {
+            res.status(400);
+            res.render('users', { users: [], errors: ['ID manquant pour suppression.'] });
+            return;
+          }
+          await userDatamapper.removeUser(id);
+          res.redirect('/admin/users');
+        } catch (err) {
+          next(err);
+        }
+      },
+    };
+    
+// Gestion des catégories : 
 
 const categoryAdminController={
     async index (_req: Request, res:Response, _next: NextFunction):Promise <void>{
@@ -178,12 +293,53 @@ const categoryAdminController={
         console.log(category)
         res.render('categories', { category, errors: []})
     },
-    // async show(req: Request, res: Response, _next: NextFunction): Promise<void> {
-    //     const id = Number(req.params.id);
-    //     const cat = await categoryDatamapper.getCategoryById(id);
-    //     res.render('category-details', { category: cat, errors: [] });
-    //   },
-};
+    async store(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+          const { name } = req.body;
+          if (!name) {
+            return res.status(400).render('categories', {
+              categories: await categoryDatamapper.getAllCategorys(),
+              errors: ['Le nom de la catégorie est requis.']
+            });
+          }
+          await categoryDatamapper.createCategory({ name });
+          res.redirect('/admin/categories');
+        } catch (err) { next(err); }
+      },
+    
+      async update(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+          const id = Number(req.params.id);
+          const { name } = req.body;
+          if (!id || !name) {
+            return res.status(400).render('categories', {
+              categories: await categoryDatamapper.getAllCategorys(),
+              errors: ['ID et nom sont requis pour la mise à jour.']
+            });
+          }
+          await categoryDatamapper.updateCategory({ id, name });
+          res.redirect('/admin/categories');
+        } catch (err) { next(err); }
+      },
+    
+      async destroy(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+          const id = Number(req.params.id);
+          if (!id) {
+            return res.status(400).render('categories', {
+              categories: await categoryDatamapper.getAllCategorys(),
+              errors: ['ID de la catégorie manquant.']
+            });
+          }
+          await categoryDatamapper.removeCategory(id);
+          res.redirect('/admin/categories');
+        } catch (err) { next(err); }
+      },
+    };
+    
+
+
+// Gestion des Ingrédients : 
 
 const ingredientAdminController = {
     async index(_req: Request, res: Response, _next: NextFunction): Promise<void> {
@@ -197,8 +353,53 @@ const ingredientAdminController = {
       const ingredient = await ingredientDatamapper.getIngredientById(id);
       res.render('ingredient-details', { ingredient, errors: [] });
     },
-  };
-  
+    async store(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+          const { name, unity } = req.body;
+          if (!name || !unity) {
+            return res.status(400).render('ingredients', {
+              ingredients: await ingredientDatamapper.getAllIngredients(),
+              errors: ['Nom et unité sont requis.']
+            });
+          }
+          await ingredientDatamapper.createIngredient({ name, unity });
+          res.redirect('/admin/ingredients');
+        } catch (err) { next(err); }
+      },
+    
+      async update(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+          const id = Number(req.params.id);
+          const { name, unity } = req.body;
+          if (!id || !name || !unity) {
+            return res.status(400).render('ingredients', {
+              ingredients: await ingredientDatamapper.getAllIngredients(),
+              errors: ['ID, nom et unité sont requis pour la mise à jour.']
+            });
+          }
+          await ingredientDatamapper.updateIngredient({ id, name, unity });
+          res.redirect('/admin/ingredients');
+        } catch (err) { next(err); }
+      },
+    
+      async destroy(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+          const id = Number(req.params.id);
+          if (!id) {
+            return res.status(400).render('ingredients', {
+              ingredients: await ingredientDatamapper.getAllIngredients(),
+              errors: ['ID de l’ingrédient manquant.']
+            });
+          }
+          await ingredientDatamapper.removeIngredient(id);
+          res.redirect('/admin/ingredients');
+        } catch (err) { next(err); }
+      },
+    };
+
+
+// Gestion des Médias : 
+
   const mediaAdminController = {
     async index(_req: Request, res: Response, _next: NextFunction): Promise<void> {
       const medias = await mediaDatamapper.getAllMedias();
@@ -209,94 +410,63 @@ const ingredientAdminController = {
       const media = await mediaDatamapper.getMediaById(id);
       res.render('media-details', { media, errors: [] });
     },
+    async store(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+          const { title, type, description, label, recipeId } = req.body;
+          if (!title || !type || !recipeId) {
+            return res.status(400).render('medias', {
+              medias: await mediaDatamapper.getAllMedias(),
+              errors: ['Titre, type et ID de recette sont requis.']
+            });
+          }
+          await mediaDatamapper.createMedia({
+            title,
+            type,
+            description: description || null,
+            label: label || null,
+            recipeId: Number(recipeId)
+          });
+          res.redirect('/admin/medias');
+        } catch (err) { next(err); }
+      },
+    
+      async update(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+          const id = Number(req.params.id);
+          const { title, type, description, label, recipeId, status } = req.body;
+          if (!id || !title || !type || !recipeId || status == null) {
+            return res.status(400).render('medias', {
+              medias: await mediaDatamapper.getAllMedias(),
+              errors: ['Tous les champs sont requis pour la mise à jour.']
+            });
+          }
+          await mediaDatamapper.updateMedia({
+            id,
+            title,
+            type,
+            description: description || null,
+            label: label || null,
+            recipeId: Number(recipeId),
+            status: status === 'true'
+          });
+          res.redirect('/admin/medias');
+        } catch (err) { next(err); }
+      },
+    
+      async destroy(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+          const id = Number(req.params.id);
+          if (!id) {
+            return res.status(400).render('medias', {
+              medias: await mediaDatamapper.getAllMedias(),
+              errors: ['ID du média manquant.']
+            });
+          }
+          await mediaDatamapper.removeMedia(id);
+          res.redirect('/admin/medias');
+        } catch (err) { next(err); }
+      },
   };
-
-
-
-
-
-
-
-// const _categoryAdminController = {
-//     async index(_req: Request, res: Response, _next:NextFunction): Promise<void> {
-    
-//         const categorys = await categoryDatamapper.getAllCategorys();
-        
-//         if (!categorys) {
-//             res.status(404).json({ error: "Catégories introuvables." });
-//             return;
-//         }
-//         res.render("categories");
-//     },
-
-//     // Affiche une catégorie
-//     async show(req: Request, res: Response, _next:NextFunction): Promise<void> {
-//         const id = Number(req.params.id);
-    
-//         if (!id) {
-//             res.status(400).json({ error: "ID invalide." });
-//             return;
-//         }
-    
-//         const category = await categoryDatamapper.getCategoryById(id);
-        
-//         if (!category) {
-//             res.status(404).json({ error: "Catégorie introuvable." });
-//             return _next();
-//         }
-//         res.render("category-details");
-//     },
-
-//     // Creer une catégorie
-//     async store(req: Request, res: Response, _next: NextFunction): Promise<void> {
-//         const data = req.body;
-    
-//         if (!data || !data.name ) {
-//             res.status(400).json({ error: "Les données de la catégorie sont invalides ou incomplètes." });
-//             return;
-//         }
-    
-//         const category = await categoryDatamapper.createCategory(data);
-    
-//         if (!category) {
-//             res.status(500).json({ error: "Échec de la création de la catégorie." });
-//             return;
-//         }
-    
-//         res.status(201).json({ message: "Catégorie créée avec succès !", category });
-//     },
-
-//     // Mettre à jour une catégorie
-//     async update(req: Request, res: Response, _next: NextFunction): Promise<void> {
-//         const id = Number(req.params.id);
-//         const {name} = req.body;
-
-//         if (!id) {
-//             res.status(400).json({ error: "ID invalide." });
-//             return;
-//         }
-
-//         const category = await categoryDatamapper.getCategoryById(id);
-//         if (!category){
-//             return _next();
-//         }
-//         await categoryDatamapper.updateCategory(name);
-//         res.status(200).json({ message: "Catégorie mise à jour avec succès." })
-//     },
-
-//     // Mettre à jour une catégorie
-//     async destroy(req: Request, res: Response, _next: NextFunction): Promise<void> {
-//         const id = Number(req.params.id);
-
-//         const category = await categoryDatamapper.removeCategory(id);
-
-//         if (!category){
-//             return _next();
-//         }
-//         res.status(200).json({ message: "Catégorie supprimée à jour avec succès." })
-//     },
-
-// };
 
 
 export {

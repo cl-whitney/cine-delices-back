@@ -16,16 +16,13 @@ const categoryDatamapper = {
     },
     
     async createCategory(data: {
-        id: number;
         name: string;
-        updated_at?: Date;
     }): Promise<Category> {
         const query = {
-            text: `INSERT INTO category (name, updated_at) 
+            text: `INSERT INTO category (name) 
                    VALUES ($1, $2) 
                    RETURNING *;`,
             values: [
-                data.id,
                 data.name,
                 new Date().toISOString()
             ]
