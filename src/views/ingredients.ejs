@@ -1,0 +1,19 @@
+<%- include('partials/head') %>
+
+<h1>Ingrédients</h1>
+
+<% if (ingredients && ingredients.length) { %>
+  <ul>
+    <% ingredients.forEach(ing => { %>
+      <li>
+        <strong>Nom :</strong> <%= ing.name %><br>
+        <strong>Unité :</strong> <%= ing.unity %><br>
+        <a href="/admin/ingredients/<%= ing.id %>">Voir le détail</a>
+      </li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>Aucun ingrédient trouvé.</p>
+<% } %>
+
+<%- include('partials/foot') %>

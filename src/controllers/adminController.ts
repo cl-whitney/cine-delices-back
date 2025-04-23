@@ -153,6 +153,7 @@ const recipeAdminController ={
 const usersAdminController ={
     async index (_req: Request, res:Response, _next: NextFunction):Promise <void>{
         const users = await userDatamapper.getAllUsers()
+
         if (!users) {
             res.status(404).json({ error: "Utilisateurs introuvables." });
             return;
@@ -179,6 +180,8 @@ const categoryAdminController={
 const ingredientAdminController = {
     async index(_req: Request, res: Response, _next: NextFunction): Promise<void> {
       const ingredients = await ingredientDatamapper.getAllIngredients();
+        // biome-ignore lint/suspicious/noConsole: <explanation>
+        console.log(ingredients)
       res.render('ingredient', { ingredients, errors: [] });
     },
     async show(req: Request, res: Response, _next: NextFunction): Promise<void> {

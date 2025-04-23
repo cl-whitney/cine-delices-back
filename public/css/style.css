@@ -1,0 +1,15 @@
+.nav-main-container{
+    display: flex;
+    justify-content: center;
+}
+
+.link-list-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 3rem;
+}
+
+.link-list{
+    text-decoration: none;
+}
