@@ -1,13 +1,15 @@
 <%- include ('partials/head') %>
 
-    <main>
-        
-        <h1>Bienvenu dans la page de gestion de Ciné Délices : 
-            <li><a href="/admin/administration">Tableau de bord</a></li>
-            <li><a href="/admin/recettes">Recettes</a></li>
-            <li><a href="/admin/categories">Catégories</a></li>
-            <li><a href="/admin/utilisateurs">Utilisateurs</a></li>
-            
+    <main class="main-container">
+        <h1>Bienvenu dans la page de gestion de Ciné Délices : </h1>
+            <nav class="nav-main-container">
+                <ul class="link-list-container">
+                    <li class="link-list"><a href="/admin/administration">Tableau de bord</a></li>
+                    <li class="link-list"><a href="/admin/recettes">Recettes</a></li>
+                    <li class="link-list"><a href="/admin/categories">Catégories</a></li>
+                    <li class="link-list"><a href="/admin/utilisateurs">Utilisateurs</a></li>
+                </ul>
+            </nav>
     </main>
 
 <%- include ('partials/foot') %>
