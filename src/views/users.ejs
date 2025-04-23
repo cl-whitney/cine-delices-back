@@ -1,0 +1,19 @@
+<%- include('partials/head') %>
+
+<h1>Utilisateurs</h1>
+
+<% if (users?.length) { %>
+  <% users.forEach(user => { %>
+    <ul>
+      <li>
+        <h3 style="color: <%= user.role === 'admin' ? 'red' : 'inherit' %>;">
+          Nom : <%= user.last_name %>
+        </h3>
+        <p>Prénom : <%= user.first_name %></p>
+        <p> style Rôle : <%= user.role %></p>
+      </li>
+    </ul>
+  <% }) %>
+<% } %>
+
+<%- include('partials/foot') %>

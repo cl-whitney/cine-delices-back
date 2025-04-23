@@ -1,8 +1,5 @@
 import { Router } from 'express';
-import { adminController, recipeAdminController} from '../controllers/adminController';
-import categoryController from '../controllers/categoryController';
-import recipeController from '../controllers/recipeController';
-import userController from '../controllers/userController';
+import { adminController, categoryAdminController, ingredientAdminController, mediaAdminController, recipeAdminController, usersAdminController } from '../controllers/adminController';
 import { catchErrors } from "../middlewares/errrosHandlers/handlers";
 import isAdmin from '../middlewares/isAdmin'
 
@@ -22,22 +19,31 @@ adminRouter.post('/deconnexion', isAdmin, adminController.adminLogout);
 
 // Gestion des recettes
 adminRouter.get('/recettes', isAdmin, recipeAdminController.index)
-adminRouter.get('/:id', isAdmin,catchErrors(recipeController.show))
-adminRouter.post('/', isAdmin, catchErrors(recipeController.store))
-adminRouter.patch('/:id', isAdmin, catchErrors(recipeController.update))
-adminRouter.delete('/', isAdmin, catchErrors(recipeController.destroy))
+adminRouter.get('/recettes/:id', isAdmin,catchErrors(recipeAdminController.show))
+// adminRouter.post('/', isAdmin, catchErrors(recipeController.store))
+// adminRouter.patch('/:id', isAdmin, catchErrors(recipeController.update))
+// adminRouter.delete('/', isAdmin, catchErrors(recipeController.destroy))
 
 // Gestion des catégories
-adminRouter.get('/', isAdmin, catchErrors(categoryController.index));
-adminRouter.get('/:id', isAdmin, catchErrors(categoryController.show));
-adminRouter.post('/', isAdmin, catchErrors(categoryController.store));
-adminRouter.patch('/:id', isAdmin, catchErrors(categoryController.update));
-adminRouter.delete('/:id', isAdmin, catchErrors(categoryController.destroy));
+adminRouter.get('/category', isAdmin, catchErrors(categoryAdminController.index));
+adminRouter.get('/category:id', isAdmin, catchErrors(categoryAdminController.show));
+// adminRouter.post('/', isAdmin, catchErrors(categoryController.store));
+// adminRouter.patch('/:id', isAdmin, catchErrors(categoryController.update));
+// adminRouter.delete('/:id', isAdmin, catchErrors(categoryController.destroy));
 
 // Gestion des utilisateurs
-adminRouter.get('/', isAdmin, catchErrors(userController.index));
-adminRouter.get('/:id', isAdmin, catchErrors(userController.show));
-adminRouter.patch('/:id', isAdmin, catchErrors(userController.update));
-adminRouter.delete('/:id', isAdmin, catchErrors(userController.destroy));
+adminRouter.get('/users', isAdmin, catchErrors(usersAdminController.index));
+// adminRouter.get('/users/:id', isAdmin, catchErrors(userController.show));
+// adminRouter.patch('/:id', isAdmin, catchErrors(userController.update));
+// adminRouter.delete('/:id', isAdmin, catchErrors(userController.destroy));
+
+// Médias
+adminRouter.get('/medias', isAdmin, catchErrors(mediaAdminController.index));
+adminRouter.get('/medias/:id', isAdmin, catchErrors(mediaAdminController.show));
+
+// Ingrédients
+adminRouter.get('/ingredients', isAdmin, catchErrors(ingredientAdminController.index));
+adminRouter.get('/ingredients/:id', isAdmin, catchErrors(ingredientAdminController.show));
+
 
 export default adminRouter;

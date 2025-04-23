@@ -1,20 +1,21 @@
 <%- include ('partials/head') %>
 
-<h1>Recettes</h1>
+<h1>Détails de la recette :</h1>
+<% if (recipe) { %>
 
-<% recipes.forEach(recipe => {%>
     <li>
-        <h2>Titre : <%recipe.title %></h2>
-        <p> <img src=" <% recipe.image %>" alt="<% recipe.title %>"></p>
-        <p>Description : <%recipe.description %></p>
-        <p>Instruction : <% recipe.instruction %></p>
-        <p>Temps : <% recipe.duration %></p>
-        <p>Difficultée : <% recipe.difficulty %></p>
-        <p>Cout: <% recipe.cost %></p>
-        <p>Status : <% recipe.status %></p>
+        <h2><%= recipe.title %></h2>
+        <p> <img src=" <% recipe.image %>" alt="<%= recipe.title %>"></p>
+        <p>Description : <%= recipe.description %></p>
+        <p>Instruction : <%= recipe.instruction %></p>
+        <p>Temps : <%= recipe.duration %></p>
+        <p>Difficultée : <%= recipe.difficulty %></p>
+        <p>Cout: <%= recipe.cost %></p>
+        <p>Status : <%= recipe.status %></p>
+        <a href="/admin/recettes">← Retour à la liste</a>
     </li>
-<%})%>
 
+<% } %>
 
 
 <%- include ('partials/foot') %>
