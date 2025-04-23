@@ -4,12 +4,14 @@
 
 <% if (locals.medias.length) { %>
     <% medias.forEach(media => {%>
-        <li>
-            <a href="/admin/medias/<%= media.id %>">
-            <p>Titre : <%=media.title %></P>
-            </a>
-            <p> type : <%= media.type %></p> 
-        </li>
+        <ul>
+            <li class="data-list">
+                <a href="/admin/medias/<%= media.id %>">
+                <p>Titre : <%=media.title %></P>
+                </a>
+                <p> type : <%= media.type %></p>
+            </li>
+        </ul>
     <%})%>
 <% } %>
 

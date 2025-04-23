@@ -3,15 +3,15 @@
 <h1 class="title-page">Ingrédients</h1>
 
 <% if (ingredients && ingredients.length) { %>
-  <ul>
-    <% ingredients.forEach(ing => { %>
-      <li>
-        <strong>Nom :</strong> <%= ing.name %><br>
-        <strong>Unité :</strong> <%= ing.unity %><br>
-        <a href="/admin/ingredients/<%= ing.id %>">Voir le détail</a>
-      </li>
-    <% }) %>
-  </ul>
+  <% ingredients.forEach(ing => { %>
+    <ul>
+        <li class="data-list">
+          <h3>Nom : <%= ing.name %></h3>
+          <p>Unité : <%= ing.unity %></p>
+          <a href="/admin/ingredients/<%= ing.id %>">Voir le détail</a>
+        </li>
+    </ul>
+  <% }) %>
 <% } else { %>
   <p>Aucun ingrédient trouvé.</p>
 <% } %>

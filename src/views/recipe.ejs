@@ -4,12 +4,14 @@
 
 <% if (locals.recipes?.length) { %>
     <% recipes.forEach(recipe => {%>
-        <li>
-            <a href="/admin/recettes/<%= recipe.id %>">
-            <h2>Titre : <%=recipe.title %></h2>
-            </a>
-            <p> Aperçu : <img src=" <%=recipe.image %>" alt="<%=recipe.title %>"></p>
-        </li>
+        <ul>
+            <li class="data-list">
+                <a href="/admin/recettes/<%= recipe.id %>">
+                <h2>Titre : <%=recipe.title %></h2>
+                </a>
+                <p> Aperçu : <img src=" <%=recipe.image %>" alt="<%=recipe.title %>"></p>
+            </li>
+        </ul>
     <%})%>
 <% } %>
 

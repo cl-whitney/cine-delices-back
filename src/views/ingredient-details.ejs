@@ -4,12 +4,20 @@
 
 <% if (ingredient) { %>
   <ul>
-    <li><strong>Nom :</strong> <%= ingredient.name %></li>
-    <li><strong>Unité :</strong> <%= ingredient.unity %></li>
-    <li><strong>Statut :</strong> <%= ingredient.status ? 'Actif' : 'Inactif' %></li>
-    <li><strong>Créé le :</strong> <%= ingredient.created_at.toLocaleDateString() %></li>
+    <li>
+      <p>Nom :</p> <%= ingredient.name %>
+    </li>
+    <li>
+      <p>Unité :</p> <%= ingredient.unity %>
+    </li>
+    <li>
+      <p>Statut :</p> <%= ingredient.status ? 'Actif' : 'Inactif' %>
+    </li>
+    <li>
+      <p>Créé le :</p> <%= ingredient.created_at.toLocaleDateString() %>
+    </li>
     <% if (ingredient.updated_at) { %>
-      <li><strong>Mis à jour le :</strong> <%= ingredient.updated_at.toLocaleDateString() %></li>
+      <li><p>Mis à jour le :</p> <%= ingredient.updated_at.toLocaleDateString() %></li>
     <% } %>
   </ul>
 <% } else { %>

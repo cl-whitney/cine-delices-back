@@ -1,32 +1,82 @@
 body{
-    padding: 1rem;
-}
-.header-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    text-decoration: none;
-    margin-top: 1rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.header-nav-list{
+.main-connexion{
     display: flex;
     justify-content: space-around;
 }
 
-.nav-list{
-    margin-right: 1rem;
+.form-container{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 40%;
+}  
+
+.form-input-container{
+    display: flex;
+    flex-direction: column;
+    margin: 0.75rem 0;
 }
 
+.form-label{
+    padding-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.form-input{
+    padding: 0.75rem 0.5rem;
+    outline: 0;
+    border: solid 1px;
+    border-radius: 5px;
+}
+
+.header-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    background-color: lightgray;
+    padding: 1rem;
+    width: 100%;
+}
+
+.header-nav-container{
+    display: flex;
+    align-items: center;
+}
+
+.header-nav-list{
+    display: flex;
+    font-size: 1.25rem;
+}
+
+.nav-list{
+    margin-right: 2rem;
+}
+
+.home-title-page{
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 3rem 0;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    color: brown;
+}
 .title-page{
     font-size: 2rem;
     font-weight: bold;
-    padding-top: 3rem;
+    padding: 2rem 0 1rem 0;
+    color: brown;
 }
 
 a{
     text-decoration: none;
     color: black;
+    padding-top: 3rem;
 }
 
 a:hover{
@@ -34,10 +84,19 @@ a:hover{
     color: brown;
 }
 
-.nav-main-container{
+.main-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-nav-container{
     display: flex;
     justify-content: center;
-    padding-top: 5rem;
+    border: none;
+    background-color: lightgray;
+    border-radius: 10px;
+    width: 30%;
 }
 
 .link-list-container{
@@ -49,4 +108,44 @@ a:hover{
 
 .link-list{
     text-decoration: none;
+    padding: 0.75rem;
+}
+
+.log-btn{
+    padding: 0.5rem;
+    color: white;
+    background-color: brown;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.10rem;
+
+}
+
+.login-btn{
+    margin: 1rem 0;
+    padding: 0.50rem;
+    font-size: 1.10rem;
+}
+
+li{
+    margin: 1rem 0;
+    padding-bottom: 0.5rem;
+}
+
+p{
+    padding: 0.5rem 0;
+}
+
+.data-list{
+    background-color: lightgray;
+}
+
+h2, h3 {
+    padding-top: 0.5rem;
+    font-size: 1.10rem;
+    font-weight: bold;
+}
+
+h3{
+    padding-bottom: 0.5rem;
 }

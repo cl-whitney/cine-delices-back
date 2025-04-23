@@ -4,17 +4,15 @@
 
 <% if (locals.users?.length) { %>
   <ul>
-    <% locals.users.forEach(user => { %>
-      <li>
-        <p style="color: <%= user.role === 'admin' ? 'red' : 'inherit' %>;">
-          <strong>Nom :</strong> <%= user.last_name %>
+    <% locals.users.forEach((user, index) => { %>
+      <li class="data-list">
+        <h3>Utilisateur <%= index + 1 %> :</h3>
+        <p>
+          Nom : <%= user.last_name %>
         </p>
-      </li>
-      <li>
-        <p><strong>Prénom :</strong> <%= user.first_name %></p>
-      </li>
-      <li>
-        <p><strong>Rôle :</strong> <%= user.role %></p>
+        <p>Prénom : <%= user.first_name %></p>
+        <p style="color: <%= user.role === 'admin' ? 'red' : 'inherit' %>;">
+          Rôle : <%= user.role %></p>
       </li>
     <% }) %>
   </ul>
