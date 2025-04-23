@@ -1,0 +1,19 @@
+<%- include('partials/head') %>
+
+<h1>Catégories</h1>
+
+<% if (category && category.length) { %>
+  <ul>
+    <% category.forEach(cat => { %>
+      <li>
+        <a href="/admin/category/<%= cat.id %>">
+          <h2>Nom : <%= cat.name %></h2>
+        </a>
+      </li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>Aucune catégorie trouvée.</p>
+<% } %>
+
+<%- include('partials/foot') %>

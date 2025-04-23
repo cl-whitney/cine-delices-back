@@ -1,7 +1,11 @@
 import type { NextFunction, Request, Response } from 'express';
 import passwordValidator from 'password-validator';
 import adminDatamapper from '../datamappers/adminDatamapper';
+import categoryDatamapper from '../datamappers/categoryDatamapper';
+import ingredientDatamapper from '../datamappers/ingredientDatamapper';
+import mediaDatamapper from '../datamappers/mediaDatamapper';
 import recipeDatamapper from '../datamappers/recipeDatamapper';
+import userDatamapper from '../datamappers/userDatamapper';
 import Scrypt from '../helpers/scrypt';
 import validateEmail from '../helpers/validateEmail';
 import { Role } from '../types/types';
@@ -138,7 +142,69 @@ const recipeAdminController ={
         res.render('recipe', { recipes, errors: []})
     },
 
+    async show(req: Request, res:Response, _next: NextFunction):Promise <void>{
+        const id = Number(req.params.id)
+        const recipe = await recipeDatamapper.getRecipeById(id)
+        res.render('recipe-details', { recipe, errors: [] })
+    },
 }; 
+
+
+const usersAdminController ={
+    async index (_req: Request, res:Response, _next: NextFunction):Promise <void>{
+        const users = await userDatamapper.getAllUsers()
+        if (!users) {
+            res.status(404).json({ error: "Utilisateurs introuvables." });
+            return;
+        }
+        res.render('users', { users, errors: []})
+    },
+
+};
+
+const categoryAdminController={
+    async index (_req: Request, res:Response, _next: NextFunction):Promise <void>{
+        const category = await categoryDatamapper.getAllCategorys()
+        // biome-ignore lint/suspicious/noConsole: <explanation>
+        console.log(category)
+        res.render('category', { category, errors: []})
+    },
+    async show(req: Request, res: Response, _next: NextFunction): Promise<void> {
+        const id = Number(req.params.id);
+        const cat = await categoryDatamapper.getCategoryById(id);
+        res.render('category-details', { category: cat, errors: [] });
+      },
+};
+
+const ingredientAdminController = {
+    async index(_req: Request, res: Response, _next: NextFunction): Promise<void> {
+      const ingredients = await ingredientDatamapper.getAllIngredients();
+      res.render('ingredient', { ingredients, errors: [] });
+    },
+    async show(req: Request, res: Response, _next: NextFunction): Promise<void> {
+      const id = Number(req.params.id);
+      const ingredient = await ingredientDatamapper.getIngredientById(id);
+      res.render('ingredient-details', { ingredient, errors: [] });
+    },
+  };
+  
+  const mediaAdminController = {
+    async index(_req: Request, res: Response, _next: NextFunction): Promise<void> {
+      const medias = await mediaDatamapper.getAllMedias();
+      res.render('media', { medias, errors: [] });
+    },
+    async show(req: Request, res: Response, _next: NextFunction): Promise<void> {
+      const id = Number(req.params.id);
+      const media = await mediaDatamapper.getMediaById(id);
+      res.render('media-details', { media, errors: [] });
+    },
+  };
+
+
+
+
+
+
 
 // const _categoryAdminController = {
 //     async index(_req: Request, res: Response, _next:NextFunction): Promise<void> {
@@ -222,4 +288,11 @@ const recipeAdminController ={
 // };
 
 
-export {adminController, recipeAdminController};
+export {
+    adminController,
+    recipeAdminController,
+    usersAdminController,
+    categoryAdminController,
+    ingredientAdminController,
+    mediaAdminController,
+  };

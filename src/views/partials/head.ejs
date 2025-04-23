@@ -10,16 +10,18 @@
     <title>Ciné Déciles</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <a href="/back-office">Dashboard</a>
-            </ul>
-        </nav>
-        <% if (typeof page !== "undefined" && page !== "connexion") { %>
+    <% if (typeof page !== "undefined" && page !== "connexion") { %>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="/admin/administration">Tableau de bord</a></li>
+                    <li><a href="/admin/recettes">Recettes</a></li>
+                    <li><a href="/admin/category">Catégories</a></li>
+                    <li><a href="/admin/users">Utilisateurs</a></li>
+                </ul>
+            </nav>
             <form action="/admin/connexion" method="POST">
                 <button type="submit">Déconnexion</button>
-                <p>La déconnexion t'es permise maintenant...</p>
             </form>
-        <% } %>
-    </header>
+        </header>
+    <% } %>
