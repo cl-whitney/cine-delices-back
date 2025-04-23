@@ -1,18 +1,26 @@
 <%- include ('partials/head') %>
 
-<h1 class="title-page">Recettes</h1>
-
-<% if (locals.recipes?.length) { %>
-    <% recipes.forEach(recipe => {%>
+<main class="main-data-container">
+    <% let totalRecipes = locals.recipes?.length || 0; %> 
+    <h1 class="title-page">Recettes : <%= totalRecipes %></h1>
+    
+    <% if (locals.recipes?.length) { %>
         <ul>
-            <li class="data-list">
-                <a href="/admin/recettes/<%= recipe.id %>">
-                <h2>Titre : <%=recipe.title %></h2>
-                </a>
-                <p> Aperçu : <img src=" <%=recipe.image %>" alt="<%=recipe.title %>"></p>
-            </li>
+            <% locals.recipes.forEach((recipe, index) => { %>
+                <li class="data-list <%= index % 2 === 0 ? 'even' : 'odd' %>">
+                    <h3>Rec n°<%= index + 1 %> :
+                        <a href="/admin/recettes/<%= recipe.id %>">
+                            <%= recipe.title %>
+                        </a>
+                    </h3>
+                    <p><img src="<%= recipe.image %>" alt="<%= recipe.title %>"></p>
+                </li>
+            <% }) %>
         </ul>
-    <%})%>
-<% } %>
+    <% } else { %>
+        <p>Aucune recette disponible.</p>
+    <% } %>
+
+</main>
 
 <%- include ('partials/foot') %>

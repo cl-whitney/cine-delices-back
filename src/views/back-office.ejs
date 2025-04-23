@@ -1,16 +1,23 @@
 <%- include ('partials/head') %>
 
-    <main class="main-container">
-        <h1 class="home-title-page">Bienvenue sur la page de gestion de Ciné Délices  </h1>
-            <nav class="main-nav-container">
-                <ul class="link-list-container">
-                    <li class="link-list"><a href="/admin/recettes">Recettes</a></li>
-                    <li class="link-list"><a href="/admin/categories">Catégories</a></li>
-                    <li class="link-list"><a href="/admin/users">Utilisateurs</a></li>
-                    <li class="link-list"><a href="/admin/ingredients">Ingredients</a></li>
-                    <li class="link-list"><a href="/admin/medias">Médias</a></li>
-                </ul>
-            </nav>
-    </main>
+<main class="main-container">
+    <h1 class="home-title-page">Bienvenue sur la page de gestion de Ciné Délices  </h1>
+        <!-- <nav class="main-nav-container">
+            <ul class="link-list-container">
+                <li class="link-list"><a href="/admin/recettes">Recettes</a></li>
+                <li class="link-list"><a href="/admin/categories">Catégories</a></li>
+                <li class="link-list"><a href="/admin/users">Utilisateurs</a></li>
+                <li class="link-list"><a href="/admin/ingredients">Ingredients</a></li>
+                <li class="link-list"><a href="/admin/medias">Médias</a></li>
+            </ul>
+        </nav> -->
+        <ul class="data-circle-container">
+            <li class="data-circle">Recettes : <%= locals.recipes?.length || 0 %></li>
+            <li class="data-circle">Catégories : <%= locals.categories?.length || 0 %></li>
+            <li class="data-circle">Utilisateurs : <%= locals.users?.length || 0 %></li>
+            <li class="data-circle">Ingrédients : <%= locals.ingredients?.length || 0 %></li>
+            <li class="data-circle">Médias : <%= locals.medias?.length || 0 %></li>
+        </ul>
+</main>
 
 <%- include ('partials/foot') %>

@@ -5,13 +5,22 @@ body{
 .main-connexion{
     display: flex;
     justify-content: space-around;
+    height: 100vh;
+    align-items: center;
+}
+
+.data-list{
+    padding: 1rem
 }
 
 .form-container{
     display: flex;
     flex-direction: column;
+    padding: 1rem;
     width: 30%;
-    height: 40%;
+    border: none;
+    border-radius: 10px;
+    background-color: lightgray;
 }  
 
 .form-input-container{
@@ -30,6 +39,7 @@ body{
     outline: 0;
     border: solid 1px;
     border-radius: 5px;
+    border-color: grey;
 }
 
 .header-container{
@@ -69,14 +79,13 @@ body{
 .title-page{
     font-size: 2rem;
     font-weight: bold;
-    padding: 2rem 0 1rem 0;
+    padding: 2rem 0 1rem 1rem;
     color: brown;
 }
 
 a{
     text-decoration: none;
     color: black;
-    padding-top: 3rem;
 }
 
 a:hover{
@@ -94,7 +103,7 @@ a:hover{
     display: flex;
     justify-content: center;
     border: none;
-    background-color: lightgray;
+    background-color: rgb(238,227,211);
     border-radius: 10px;
     width: 30%;
 }
@@ -103,12 +112,12 @@ a:hover{
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 .link-list{
     text-decoration: none;
-    padding: 0.75rem;
+    margin: 0.5rem;
 }
 
 .log-btn{
@@ -128,16 +137,11 @@ a:hover{
 }
 
 li{
-    margin: 1rem 0;
     padding-bottom: 0.5rem;
 }
 
 p{
     padding: 0.5rem 0;
-}
-
-.data-list{
-    background-color: lightgray;
 }
 
 h2, h3 {
@@ -148,4 +152,38 @@ h2, h3 {
 
 h3{
     padding-bottom: 0.5rem;
+}
+
+img{
+    width: 6rem;
+    height: 6rem;
+}
+
+.even {
+    background-color: rgb(238,227,211); /* Gris clair */
+}
+
+.odd {
+    background-color: rgba(226, 224, 224, 0.623); /* Blanc */
+}
+
+.data-circle{
+    width: 150px;
+    height: 150px;
+    border: solid 10px;
+    border-color:lightgrey;
+    border-radius: 50%;
+    background-color: rgb(238,227,211);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:black;
+    font-size: 16px;
+    margin-right: 2rem;
+
+}
+
+.data-circle-container{
+    display: flex;
+    margin: 1rem auto;
 }

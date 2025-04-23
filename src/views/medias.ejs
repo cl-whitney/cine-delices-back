@@ -1,19 +1,22 @@
 <%- include ('partials/head') %>
 
-<h1 class="title-page">Liste des médias</h1>
-
-<% if (locals.medias.length) { %>
-    <% medias.forEach(media => {%>
-        <ul>
-            <li class="data-list">
-                <a href="/admin/medias/<%= media.id %>">
-                <p>Titre : <%=media.title %></P>
-                </a>
-                <p> type : <%= media.type %></p>
-            </li>
-        </ul>
-    <%})%>
-<% } %>
+<main class="main-data-container">
+    <% let totalMedias = locals.medias?.length || 0; %>
+    <h1 class="title-page">Médias : <%= totalMedias %></h1>
+    
+    <% if (locals.medias.length) { %>
+        <% medias.forEach((media, index) => {%>
+            <ul>
+                <li class="data-list <%= index % 2 === 0 ? 'even' : 'odd' %>">
+                    <a href="/admin/medias/<%= media.id %>">
+                    <p>Titre : <%=media.title %></P>
+                    </a>
+                    <p> type : <%= media.type %></p>
+                </li>
+            </ul>
+        <%})%>
+    <% } %>
+</main>
 
 
 <%- include ('partials/foot') %>

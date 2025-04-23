@@ -1,17 +1,22 @@
 <%- include('partials/head') %>
 
-<h1 class="title-page">Catégories</h1>
-
-<% if (category && category.length) { %>
+<main class="main-data-container">
+  <% let totalCategories = locals.category?.length || 0; %>
+<h1 class="title-page">Catégories : <%= totalCategories %></h1>
+  
+<% if (locals.category?.length) { %>
   <ul>
-    <% category.forEach(cat => { %>
-      <li class="data-list">
-          <p>Nom : <%= cat.name %></p>
+    <% locals.category.forEach((cat, index) => { %>
+      <li class="data-list <%= index % 2 === 0 ? 'even' : 'odd' %>">
+          <h3>Cat n° <%= index + 1 %> : </h3>
+          <p><%= cat.name %></p>
       </li>
     <% }) %>
   </ul>
 <% } else { %>
   <p>Aucune catégorie trouvée.</p>
 <% } %>
+
+</main>
 
 <%- include('partials/foot') %>

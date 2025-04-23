@@ -1,29 +1,31 @@
 <%- include('partials/head') %>
 
-<h1 class="title-page">Détail de l’ingrédient</h1>
-
-<% if (ingredient) { %>
-  <ul>
-    <li>
-      <p>Nom :</p> <%= ingredient.name %>
-    </li>
-    <li>
-      <p>Unité :</p> <%= ingredient.unity %>
-    </li>
-    <li>
-      <p>Statut :</p> <%= ingredient.status ? 'Actif' : 'Inactif' %>
-    </li>
-    <li>
-      <p>Créé le :</p> <%= ingredient.created_at.toLocaleDateString() %>
-    </li>
-    <% if (ingredient.updated_at) { %>
-      <li><p>Mis à jour le :</p> <%= ingredient.updated_at.toLocaleDateString() %></li>
+<main class="main-data-container">
+  <h1 class="title-page">Détail de l’ingrédient</h1>
+  
+  <% if (ingredient) { %>
+    <ul>
+      <li>
+        <p>Nom :</p> <%= ingredient.name %>
+      </li>
+      <li>
+        <p>Unité :</p> <%= ingredient.unity %>
+      </li>
+      <li>
+        <p>Statut :</p> <%= ingredient.status ? 'Actif' : 'Inactif' %>
+      </li>
+      <li>
+        <p>Créé le :</p> <%= ingredient.created_at.toLocaleDateString() %>
+      </li>
+      <% if (ingredient.updated_at) { %>
+        <li><p>Mis à jour le :</p> <%= ingredient.updated_at.toLocaleDateString() %></li>
+      <% } %>
+    </ul>
+    <% } else { %>
+      <p>Aucun ingrédient à afficher.</p>
     <% } %>
-  </ul>
-<% } else { %>
-  <p>Aucun ingrédient à afficher.</p>
-<% } %>
-
-<p><a href="/admin/ingredients">← Retour à la liste des ingrédients</a></p>
+  
+  <p><a href="/admin/ingredients">← Retour à la liste des ingrédients</a></p>
+</main>
 
 <%- include('partials/foot') %>

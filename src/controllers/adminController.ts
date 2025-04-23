@@ -13,7 +13,8 @@ import { Role } from '../types/types';
 const adminController = {
     async showLoginForm(_req: Request, res: Response, _next: NextFunction): Promise<void> {
         res.locals.page = "connexion";
-        res.render("connexion", {page: "connexion", errors: [] });
+        res.locals.admin = "back-office"
+        res.render("connexion", {page: "connexion", admin: "back-office", errors: [] });
     },
     
     async login(req: Request, res: Response, _next: NextFunction): Promise<void> {
@@ -114,7 +115,6 @@ const adminController = {
             errors: ['Email ou mot de passe incorrect ou accès non autorisé'],
           });
         }
-    
         // Sinon on affiche le back-office
         res.render('back-office');
       },

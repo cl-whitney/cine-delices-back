@@ -1,17 +1,21 @@
 <%- include ('partials/head') %>
-<% if (media) { %>
-    <h1 class="title-page">Details du media</h1>
-    <ul>
-        <li class="data-list">
-            <h2><%= media.title %></h2>
-            <p>type : <%= media.type %></p>
-            <p>description : <%= media.description %></p>
-            <p>recipe_id : <%= media.recipe_id %></p>
-            <p>status : <%= media.difficulty %></p>
-            <p>Crée le: <%= media.created_at %></p>
-            <p>Modifié le : <%= media.updated_at %></p>
-            <a href="/admin/medias">← Retour à la liste</a>
-        </li>
-    </ul>
-<% } %>
+
+<main class="main-data-container">
+    <% if (media) { %>
+        <h1 class="title-page">Details du media</h1>
+        <ul>
+            <li class="data-list">
+                <h2><%= media.title %></h2>
+                <p>type : <%= media.type %></p>
+                <p>description : <%= media.description %></p>
+                <p>recipe_id : <%= media.recipe_id %></p>
+                <p>status : <%= media.difficulty %></p>
+                <p>Crée le: <%= media.created_at %></p>
+                <p>Modifié le : <%= media.updated_at %></p>
+                <a href="/admin/medias">← Retour à la liste</a>
+            </li>
+        </ul>
+    <% } %>
+</main>
+
 <%- include ('partials/foot') %>

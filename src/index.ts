@@ -21,10 +21,12 @@ app.use(express.static(join(__dirname, 'public')));
 
 app.use((_req: Request, res: Response, next: NextFunction) => {
   res.locals.page = null; // Initialisation de la variable
-  res.locals.recipes = null;
   next();
 });
-
+// app.use((_req: Request, res: Response, next: NextFunction) => {
+//   res.locals.admin = null; // Initialisation de la variable
+//   next();
+// });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

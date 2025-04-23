@@ -1,19 +1,21 @@
 <%- include('partials/head') %>
 
-<h1 class="title-page">Ingrédients</h1>
-
-<% if (ingredients && ingredients.length) { %>
-  <% ingredients.forEach(ing => { %>
-    <ul>
-        <li class="data-list">
-          <h3>Nom : <%= ing.name %></h3>
-          <p>Unité : <%= ing.unity %></p>
-          <a href="/admin/ingredients/<%= ing.id %>">Voir le détail</a>
-        </li>
-    </ul>
-  <% }) %>
-<% } else { %>
-  <p>Aucun ingrédient trouvé.</p>
-<% } %>
+<main class="main-data-container">
+  <h1 class="title-page">Ingrédients</h1>
+  
+  <% if (ingredients && ingredients.length) { %>
+    <% ingredients.forEach((ing, index)=> { %>
+      <ul>
+          <li class="data-list <%= index % 2 === 0 ? 'even' : 'odd' %>">
+            <h3>Nom : <%= ing.name %></h3>
+            <p>Unité : <%= ing.unity %></p>
+            <a href="/admin/ingredients/<%= ing.id %>">Voir le détail</a>
+          </li>
+      </ul>
+    <% }) %>
+  <% } else { %>
+    <p>Aucun ingrédient trouvé.</p>
+  <% } %>
+</main>
 
 <%- include('partials/foot') %>
