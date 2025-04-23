@@ -147,6 +147,14 @@ const recipeAdminController ={
         const recipe = await recipeDatamapper.getRecipeById(id)
         res.render('recipe-details', { recipe, errors: [] })
     },
+
+    // async store(req: Request, _res: Response, _next: NextFunction):Promise <void>{
+    //     try {
+    //         const {title, image, description, instrucion, duration, difficulty, cost, user_id, categories, ingredients, media}
+    //         = req.body
+    //         if (!title)
+    //     }}
+
 }; 
 
 
