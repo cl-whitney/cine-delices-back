@@ -9,6 +9,8 @@ import userDatamapper from '../datamappers/userDatamapper';
 import Scrypt from '../helpers/scrypt';
 import validateEmail from '../helpers/validateEmail';
 import { Role } from '../types/types';
+import type { User } from '../types/types';
+
 
 const adminController = {
     async showLoginForm(_req: Request, res: Response, _next: NextFunction): Promise<void> {
@@ -144,54 +146,76 @@ const recipeAdminController ={
         res.render('recipe', { recipes, errors: []})
     },
 
-    async showRecipeForm(_req: Request, res: Response, _next: NextFunction): Promise<void> {
+    async showRecipeForm(req: Request, res: Response, _next: NextFunction): Promise<void> {
       const formData = {
-        title:"",
-        image:"",
-        description:"",
-        instruction:"",
-        duration:"",
-        difficulty:"",
-        cost:"",
-
-      }
-      res.render("addRecipe", { formData, errors: [] });
-  },
-
+        title: "",
+        image: "",
+        description: "",
+        instruction: "",
+        duration: "",
+        difficulty: "",
+        cost: "",
+      };
+      const sessionUser = req.session.user as User;
+      const userId = sessionUser.id;
+  
+      res.render("addRecipe", {
+        formData,
+        errors: [],
+        userId,            // ← on le passe dans le template
+      });
+    },
     async show(req: Request, res:Response, _next: NextFunction):Promise <void>{
         const id = Number(req.params.id)
         const recipe = await recipeDatamapper.getRecipeById(id)
         res.render('recipe-details', { recipe, errors: [] })
     },
 
-    async store(req: Request, res: Response, next: NextFunction):Promise <void>{
-        try {
-            const {title, image, description, instruction, duration, difficulty, cost, user_id, categories, ingredients, media}= req.body
-            
-            if (!title || !instruction || !duration || !difficulty || !cost || !user_id) {
-                return res
-                  .status(400)
-                  .render('admin/recettes', { error: 'Tous les champs obligatoires doivent être remplis.' });
-              }
+    async store(req: Request, res: Response, next: NextFunction): Promise<void> {
+      try {
+        const {
+          title,
+          image,
+          description,
+          instruction,
+          duration,
+          difficulty,
+          cost,
+          categories,
+          ingredients,
+          media,
+        } = req.body;
+    
+        const sessionUser = req.session.user as User;
+        const userId = sessionUser.id;
+    
+        if (!title || !instruction || !duration || !difficulty || !cost) {
+          return res.status(400).render('addRecipe', {
+            formData: req.body,
+            errors: ['Tous les champs obligatoires doivent être remplis.'],
+          });
+        }
+    
         await recipeDatamapper.createRecipe({
-            title,
-            image: image || null,
-            description: description || null,
-            instruction,
-            duration,
-            difficulty,
-            cost,
-            user_id:(user_id),
-            categories,
-            ingredients,
-            media
+          title,
+          image: image || null,
+          description: description || null,
+          instruction,
+          duration: Number(duration),
+          difficulty,
+          cost,
+          user_id: userId,
+          categories,
+          ingredients,
+          media,
         });
-
+    
         res.redirect('/admin/recettes');
       } catch (err) {
         next(err);
       }
     },
+
     async update(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
           const id = Number(req.params.id);

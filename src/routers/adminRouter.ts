@@ -20,6 +20,7 @@ adminRouter.post('/deconnexion', isAdmin, adminController.adminLogout);
 // Gestion des recettes
 adminRouter.get('/recettes', isAdmin, recipeAdminController.index)
 adminRouter.get('/recette/formulaire', isAdmin, recipeAdminController.showRecipeForm)
+adminRouter.post('/recette', isAdmin, recipeAdminController.showRecipeForm)
 adminRouter.get('/recettes/:id', isAdmin,catchErrors(recipeAdminController.show))
 adminRouter.post('/recettes', isAdmin, catchErrors(recipeAdminController.store))
 adminRouter.patch('/recettes/:id', isAdmin, catchErrors(recipeAdminController.update))
