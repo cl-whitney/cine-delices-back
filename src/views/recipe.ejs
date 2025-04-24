@@ -2,6 +2,9 @@
 
 <main class="main-data-container">
     <% let totalRecipes = locals.recipes?.length || 0; %> 
+    <form action="/admin/recette/formulaire" method="GET">
+        <button class="log-btn" type="submit">Ajouter une recette</button>
+    </form>
     <h1 class="title-page">Recettes : <%= totalRecipes %></h1>
     
     <% if (locals.recipes?.length) { %>

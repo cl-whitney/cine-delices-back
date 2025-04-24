@@ -1,0 +1,63 @@
+<%- include ('partials/head') %>
+
+<main class="main-connexion">
+
+    <h1>Ajouter une recette :</h1>
+
+    <form class="form-container" action="/admin/recettes" method="POST">
+        <div class="form-input-container">
+            <label class="form-label" for="title">Titre :</label>
+            <input class="form-input" type="text" id="title" name="title" placeholder="Lasagnes" value= "<%= formData.title%>" required >
+        </div>
+
+        <div class="form-input-container">
+            <label class="form-label" for="image">Image</label>
+            <input class="form-input" type="url" id="image" name="image" value=" <%= formData.image %>">
+        </div>
+
+        <div class="form-input-container">
+            <label class="form-label" for="description">Description </label>
+            <input class="form-input" type="textarea" id="description" name="description" value=" <%= formData.description %>">
+        </div>
+
+        <div class="form-input-container">
+            <label class="form-label" for="instruction">Instruction </label>
+            <input class="form-input" type="textarea" id="instruction" name="instruction" value=" <%= formData.instruction %>">
+        </div>
+
+        <div class="form-input-container">
+            <label class="form-label" for="duration">Durée </label>
+            <input class="form-input" type="text" id="duration" name="duration" value=" <%= formData.duration %>" required>
+        </div>
+
+        <div class="form-input-container">
+            <label class="form-label" for="difficulty">Difficulté </label>
+                <select id="difficultyEnum" name="difficultyEnum">
+                    <option value="option1">Facile</option>
+                    <option value="option2">Moyen</option>
+                    <option value="option3">Difficile</option>
+                </select>
+        </div>
+
+        <div class="form-input-container">
+            <label class="form-label" for="cost">Coût </label>
+                <select id="costEnum" name="costEnum">
+                    <option value="option1">Petit budget</option>
+                    <option value="option2">Rapport qualité prix</option>
+                    <option value="option3">Couteux</option>
+                </select>
+        </div>
+
+        <input class="log-btn login-btn" type="submit" value="Se connecter">
+
+        <% if (errors && errors.length > 0) { %>
+            <ul>
+                <% errors.forEach(function(error) { %>
+                    <li><%= error %></li>
+                <% }); %>
+            </ul>
+        <% } %>
+    </form>
+</main>
+
+<%- include ('partials/foot') %>

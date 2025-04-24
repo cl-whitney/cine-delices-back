@@ -13,8 +13,7 @@ import { Role } from '../types/types';
 const adminController = {
     async showLoginForm(_req: Request, res: Response, _next: NextFunction): Promise<void> {
         res.locals.page = "connexion";
-        res.locals.admin = "back-office"
-        res.render("connexion", {page: "connexion", admin: "back-office", errors: [] });
+        res.render("connexion", {page: "connexion", errors: [] });
     },
     
     async login(req: Request, res: Response, _next: NextFunction): Promise<void> {
@@ -136,6 +135,7 @@ const adminController = {
 
 // Gestion des recettes : 
 
+
 const recipeAdminController ={
     async index (_req: Request, res:Response, _next: NextFunction):Promise <void>{
         const recipes = await recipeDatamapper.getAllRecipes()
@@ -143,6 +143,20 @@ const recipeAdminController ={
         console.log(recipes)
         res.render('recipe', { recipes, errors: []})
     },
+
+    async showRecipeForm(_req: Request, res: Response, _next: NextFunction): Promise<void> {
+      const formData = {
+        title:"",
+        image:"",
+        description:"",
+        instruction:"",
+        duration:"",
+        difficulty:"",
+        cost:"",
+
+      }
+      res.render("addRecipe", { formData, errors: [] });
+  },
 
     async show(req: Request, res:Response, _next: NextFunction):Promise <void>{
         const id = Number(req.params.id)
