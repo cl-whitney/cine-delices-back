@@ -13,8 +13,8 @@ router.use('/api/auth', authRouter);
 router.use('/admin', adminRouter);
 router.use('/api/categories', categoryRouter);
 router.use('/api/recettes', recipeRouter);
-router.use('api/users', UsersRouter)
-router.use('api/ingredients', ingredientRouter)
-router.use('api/medias', mediaRouter)
+router.use('/api/users', UsersRouter)
+router.use('/api/ingredients', ingredientRouter)
+router.use('/api/medias', mediaRouter)
 
 export default router;
