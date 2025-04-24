@@ -3,6 +3,17 @@ import userDatamapper from "../datamappers/userDatamapper";
 
 const userController = {
 
+    async index(_req: Request, res: Response, _next: NextFunction): Promise<void> {
+        const users = await userDatamapper.getAllUsers();
+
+        if (!users || users.length === 0) {
+            res.status(404).json({ error: "Aucun utilisateur trouvé." });
+            return;
+        }
+
+        res.json(users);
+    },
+
     // Affiche un utilisateur
     async show(req: Request, res: Response, _next:NextFunction): Promise<void> {
         const id = Number(req.params.id);
