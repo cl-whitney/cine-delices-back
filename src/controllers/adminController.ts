@@ -210,7 +210,7 @@ const recipeAdminController ={
           media,
         });
     
-        res.redirect('recipe');
+        res.redirect('/admin/recettes');
       } catch (err) {
         next(err);
       }
