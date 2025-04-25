@@ -1,21 +1,37 @@
 <%- include('partials/head') %>
 
 <main class="main-data-container">
+  <form class="form-add-btn" action="/admin/categories/formulaire" method="GET">
+    <button class="log-btn" type="submit">Ajouter une catégorie</button>
+  </form>
+
   <% let totalCategories = locals.category?.length || 0; %>
-<h1 class="title-page">Catégories : <%= totalCategories %></h1>
+  <h1 class="title-page">Catégories : <%= totalCategories %></h1>
   
-<% if (locals.category?.length) { %>
-  <ul>
-    <% locals.category.forEach((cat, index) => { %>
-      <li class="data-list <%= index % 2 === 0 ? 'even' : 'odd' %>">
-          <h3>Cat n° <%= index + 1 %> : </h3>
-          <p><%= cat.name %></p>
-      </li>
-    <% }) %>
-  </ul>
-<% } else { %>
-  <p>Aucune catégorie trouvée.</p>
-<% } %>
+  <% if (locals.category?.length) { %>
+    <ul>
+      <% locals.category.forEach((cat, index) => { %>
+        <li class="data-list <%= index % 2 === 0 ? 'even' : 'odd' %>">
+            <h3>Cat n° <%= index + 1 %> : </h3>
+            <p><%= cat.name %></p>
+
+            <form
+              class="d-inline"
+              action="/admin/categories/<%= category.id %>/delete"
+              method="POST"
+              >
+              <input
+                  class="btn btn-outline-danger py-0 px-1 ms-3 fs-6"
+                  type="submit"
+                  value="SUPPRIMER"
+              >
+            </form>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>Aucune catégorie trouvée.</p>
+  <% } %>
 
 </main>
 

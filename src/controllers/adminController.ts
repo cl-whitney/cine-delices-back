@@ -136,14 +136,13 @@ const adminController = {
 };
 
 // Gestion des recettes : 
-
-
 const recipeAdminController ={
     async index (_req: Request, res:Response, _next: NextFunction):Promise <void>{
         const recipes = await recipeDatamapper.getAllRecipes()
         // biome-ignore lint/suspicious/noConsole: <explanation>
         console.log(recipes)
         res.render('recipe', { recipes, errors: []})
+
     },
 
     async showRecipeForm(req: Request, res: Response, _next: NextFunction): Promise<void> {
@@ -165,6 +164,27 @@ const recipeAdminController ={
         userId,            // ← on le passe dans le template
       });
     },
+
+    async showEditRecipeForm(req: Request, res: Response, _next: NextFunction): Promise<void> {
+      const formData = {
+        title: "",
+        image: "",
+        description: "",
+        instruction: "",
+        duration: "",
+        difficulty: "",
+        cost: "",
+      };
+      const sessionUser = req.session.user as User;
+      const userId = sessionUser.id;
+  
+      res.render("editRecipe", {
+        formData,
+        errors: [],
+        userId,            // ← on le passe dans le template
+      });
+    },
+
     async show(req: Request, res:Response, _next: NextFunction):Promise <void>{
         const id = Number(req.params.id)
         const recipe = await recipeDatamapper.getRecipeById(id)
@@ -216,6 +236,8 @@ const recipeAdminController ={
       }
     },
 
+
+
     async update(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
           const id = Number(req.params.id);
@@ -236,7 +258,7 @@ const recipeAdminController ={
           if (!id || !title || !instruction || !duration || !difficulty || !cost) {
             return res
               .status(400)
-              .render('recipe-details', { error: 'ID et tous les champs obligatoires doivent être fournis.' });
+              .render('editRecipe', { error: 'ID et tous les champs obligatoires doivent être fournis.' });
           }
     
           await recipeDatamapper.updateRecipe({
@@ -331,6 +353,21 @@ const categoryAdminController={
         console.log(category)
         res.render('categories', { category, errors: []})
     },
+
+    async showCategoryForm(req: Request, res: Response, _next: NextFunction): Promise<void> {
+      // const sessionUser = req.session.user as User;
+      // const userId = sessionUser.id;
+  
+      const formData = {
+        name: "",
+      };
+      res.render("addCategory", {
+        formData,
+        errors: [],
+        // userId,          
+      });
+    },
+
     async store(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
           const { name } = req.body;

@@ -3,7 +3,7 @@
 <main class="container py-4">
   <h1 class="my-3">Modifier la recette</h1>
 
-  <form class="mb-5" action="/admin/recettes/<%= recipe.id %>" method="POST">
+  <form  class="form-container" class="mb-5" action="/admin/recettes/<%= recipe.id %>" method="POST">
     <!-- Titre -->
     <label class="form-label" for="title">Titre actuel</label>
     <input class="form-control mb-2" type="text" disabled value="<%= recipe.title %>">

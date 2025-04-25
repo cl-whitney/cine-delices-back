@@ -1,10 +1,12 @@
 <%- include ('partials/head') %>
 
 <main class="main-data-container">
-    <% let totalRecipes = locals.recipes?.length || 0; %> 
-    <form action="/admin/recette/formulaire" method="GET">
+    <form class="form-add-btn" action="/admin/recette/formulaire" method="GET">
         <button class="log-btn" type="submit">Ajouter une recette</button>
     </form>
+
+    <% let totalRecipes = locals.recipes?.length || 0; %> 
+    
     <h1 class="title-page">Recettes : <%= totalRecipes %></h1>
     
     <% if (locals.recipes?.length) { %>
@@ -16,18 +18,25 @@
                             <%= recipe.title %>
                         </a>
                     </h3>
-                    <p><img src="/images/<%= recipe.image %>" alt="<%= recipe.title %>"></p>
-                        <form
-                        class="d-inline"
-                        action="/admin/recettes/<%= recipe.id %>/delete"
-                        method="POST"
-                        >
-                        <input
-                            class="btn btn-outline-danger py-0 px-1 ms-3 fs-6"
-                            type="submit"
-                            value="SUPPRIMER"
-                        >
+                    <p><img src="<%= recipe.image%>" alt="<%= recipe.title %>"></p>
+                    <div class="form-btn-handlers">
+                        <form class="d-inline" action="/admin/recettes/<%= recipe.id %>/delete" method="POST">
+                            <input class="btn btn-outline-danger py-0 px-1 ms-3 fs-6" type="submit" value="SUPPRIMER"
+>
                         </form>
+                        <form
+                            class="d-inline"
+                            action="/admin/recettes/<%= recipe.id %>/edit"
+                            method="POST"
+                        >
+                            <input
+                                class="btn btn-outline-primary py-0 px-1 ms-3 fs-6"
+                                type="submit"
+                                value="MODIFIER"
+                            >
+                        </form>
+
+                    </div>
                 </li>
             <% }) %>
         </ul>

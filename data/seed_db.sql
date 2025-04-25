@@ -3,12 +3,12 @@
 -- RECETTES
 INSERT INTO recipe (title, image, description, instruction, duration, difficulty, cost, user_id)
 VALUES
-('Spaghetti Carbonara', 'plat-1.jpg', 'Un classique italien.', 'Faire revenir les lardons, cuire les pâtes...', 25, 'Facile', 'Petit budget', 1),
-('Tarte aux pommes', 'plat-2.jpg', 'Tarte gourmande aux pommes.', 'Préparer une pâte brisée, disposer les pommes...', 45, 'Moyen', 'Rapport qualité prix', 2),
-('Curry de légumes', 'plat-3.jpg', 'Un plat végétarien savoureux.', 'Faire revenir les légumes avec les épices...', 40, 'Moyen', 'Petit budget', 1),
-('Poulet rôti', 'plat-4.jpg', 'Simple et efficace.', 'Assaisonner le poulet, enfourner 1h à 180°C.', 60, 'Facile', 'Rapport qualité prix', 2),
-('Riz cantonnais', 'plat-5.jpg', 'Recette asiatique rapide.', 'Faire revenir le riz avec les légumes et l’œuf...', 30, 'Facile', 'Petit budget', 1),
-('Brownie chocolat', 'plat-6.jpg', 'Dessert fondant au chocolat.', 'Faire fondre chocolat, mélanger, cuire.', 35, 'Facile', 'Couteux', 2);
+('Spaghetti Carbonara', 'https://cdn.pixabay.com/photo/2011/04/29/11/20/spaghetti-7113_960_720.jpg', 'Un classique italien.', 'Faire revenir les lardons, cuire les pâtes...', 25, 'Facile', 'Petit budget', 1),
+('Tarte aux pommes', 'https://cdn.pixabay.com/photo/2014/12/03/17/26/apple-pie-555624_960_720.jpg', 'Tarte gourmande aux pommes.', 'Préparer une pâte brisée, disposer les pommes...', 45, 'Moyen', 'Rapport qualité prix', 2),
+('Curry de légumes', 'https://img.mesrecettesfaciles.fr/2019-04/curry-de-legumes-vjw-1200.webp', 'Un plat végétarien savoureux.', 'Faire revenir les légumes avec les épices...', 40, 'Moyen', 'Petit budget', 1),
+('Poulet rôti', 'https://cdn.pixabay.com/photo/2016/11/08/10/39/chicken-1807883_960_720.jpg', 'Simple et efficace.', 'Assaisonner le poulet, enfourner 1h à 180°C.', 60, 'Facile', 'Rapport qualité prix', 2),
+('Riz cantonnais', 'https://assets.afcdn.com/recipe/20130909/41109_w1024h768c1cx1936cy1296.jpg', 'Recette asiatique rapide.', 'Faire revenir le riz avec les légumes et l’œuf...', 30, 'Facile', 'Petit budget', 1),
+('Brownie chocolat', 'https://cdn.pixabay.com/photo/2018/04/24/20/12/dessert-3347905_960_720.jpg', 'Dessert fondant au chocolat.', 'Faire fondre chocolat, mélanger, cuire.', 35, 'Facile', 'Couteux', 2);
 
 -- CATÉGORIES
 INSERT INTO category (name, recipe_id)
@@ -80,9 +80,9 @@ VALUES
 -- MÉDIAS
 INSERT INTO media (title, type, description, label, recipe_id)
 VALUES
-('Photo Carbonara', 'image', 'Plat terminé', 'principal', 1),
-('Vidéo Tarte', 'video', 'Tuto complet', 'étapes', 2),
-('Photo Curry', 'image', 'Servi avec riz', 'final', 3),
-('Image Poulet', 'image', 'En cuisson', 'four', 4),
-('Vidéo Riz', 'video', 'Rapide et efficace', 'explication', 5),
-('Photo Brownie', 'image', 'Zoom texture', 'appétissant', 6);
+('Ratatouille', 'film', 'Un hommage à la cuisine française à travers l’histoire d’un rat chef.', 'principal', 1),
+('Julie & Julia', 'film', 'Deux époques, deux femmes, une passion commune pour la cuisine.', 'étapes', 2),
+('Chef', 'film', 'Un chef redécouvre sa passion pour la cuisine en lançant son propre food truck.', 'final', 3),
+('The Bear', 'série', 'Un chef talentueux tente de sauver le restaurant familial en plein chaos.', 'four', 4),
+('The Hundred-Foot Journey', 'film', 'Une rencontre entre la gastronomie indienne et la haute cuisine française.', 'explication', 5),
+('Cooked', 'série', 'Une exploration de la cuisine sous toutes ses formes à travers la science et l’histoire.', 'appétissant', 6);
