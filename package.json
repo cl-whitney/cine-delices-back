@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "format": "pnpx @biomejs/biome format ./",
     "format:fix": "pnpx @biomejs/biome format --write ./",
     "lint": "pnpx @biomejs/biome lint ./",
@@ -37,10 +37,13 @@
     "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.1",
     "@types/express-session": "^1.18.1",
+    "@types/jest": "^29.5.14",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.14.1",
     "@types/pg": "^8.11.13",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.9",
+    "ts-jest": "^29.3.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
