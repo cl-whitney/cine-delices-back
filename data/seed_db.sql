@@ -3,12 +3,12 @@
 -- RECETTES
 INSERT INTO recipe (title, image, description, instruction, duration, difficulty, cost, user_id)
 VALUES
-('Spaghetti Carbonara', 'carbonara.jpg', 'Un classique italien.', 'Faire revenir les lardons, cuire les pâtes...', 25, 'Facile', 'Petit budget', 1),
-('Tarte aux pommes', 'tarte_pommes.jpg', 'Tarte gourmande aux pommes.', 'Préparer une pâte brisée, disposer les pommes...', 45, 'Moyen', 'Rapport qualité prix', 2),
-('Curry de légumes', 'curry_legumes.jpg', 'Un plat végétarien savoureux.', 'Faire revenir les légumes avec les épices...', 40, 'Moyen', 'Petit budget', 1),
-('Poulet rôti', 'poulet_roti.jpg', 'Simple et efficace.', 'Assaisonner le poulet, enfourner 1h à 180°C.', 60, 'Facile', 'Rapport qualité prix', 2),
-('Riz cantonnais', 'riz_cantonnais.jpg', 'Recette asiatique rapide.', 'Faire revenir le riz avec les légumes et l’œuf...', 30, 'Facile', 'Petit budget', 1),
-('Brownie chocolat', 'brownie.jpg', 'Dessert fondant au chocolat.', 'Faire fondre chocolat, mélanger, cuire.', 35, 'Facile', 'Couteux', 2);
+('Spaghetti Carbonara', 'plat-1.jpg', 'Un classique italien.', 'Faire revenir les lardons, cuire les pâtes...', 25, 'Facile', 'Petit budget', 1),
+('Tarte aux pommes', 'plat-2.jpg', 'Tarte gourmande aux pommes.', 'Préparer une pâte brisée, disposer les pommes...', 45, 'Moyen', 'Rapport qualité prix', 2),
+('Curry de légumes', 'plat-3.jpg', 'Un plat végétarien savoureux.', 'Faire revenir les légumes avec les épices...', 40, 'Moyen', 'Petit budget', 1),
+('Poulet rôti', 'plat-4.jpg', 'Simple et efficace.', 'Assaisonner le poulet, enfourner 1h à 180°C.', 60, 'Facile', 'Rapport qualité prix', 2),
+('Riz cantonnais', 'plat-5.jpg', 'Recette asiatique rapide.', 'Faire revenir le riz avec les légumes et l’œuf...', 30, 'Facile', 'Petit budget', 1),
+('Brownie chocolat', 'plat-6.jpg', 'Dessert fondant au chocolat.', 'Faire fondre chocolat, mélanger, cuire.', 35, 'Facile', 'Couteux', 2);
 
 -- CATÉGORIES
 INSERT INTO category (name, recipe_id)

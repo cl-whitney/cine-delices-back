@@ -16,7 +16,7 @@
                             <%= recipe.title %>
                         </a>
                     </h3>
-                    <p><img src="<%= recipe.image %>" alt="<%= recipe.title %>"></p>
+                    <p><img src="/images/<%= recipe.image %>" alt="<%= recipe.title %>"></p>
                         <form
                         class="d-inline"
                         action="/admin/recettes/<%= recipe.id %>/delete"
