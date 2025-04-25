@@ -43,13 +43,14 @@ body{
 }
 
 .header-container{
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     text-decoration: none;
     background-color: lightgray;
-    padding: 1rem;
+    padding: 2rem;
     width: 100%;
 }
 
