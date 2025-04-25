@@ -10,6 +10,7 @@ import notFound from './middlewares/errrosHandlers/notFound';
 import initUserSession from './middlewares/initAdminSession';
 import router from './routers/router';
 
+
 const app = express();
 
 // Branchement du template engine EJS
@@ -69,6 +70,7 @@ app.get(
     res.redirect('/admin/connexion');
   }
 );
+
 
 // Branchement du router
 app.use(router);

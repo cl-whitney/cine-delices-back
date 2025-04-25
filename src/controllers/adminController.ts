@@ -210,7 +210,7 @@ const recipeAdminController ={
           media,
         });
     
-        res.redirect('/admin/recettes');
+        res.redirect('recipe');
       } catch (err) {
         next(err);
       }
@@ -236,7 +236,7 @@ const recipeAdminController ={
           if (!id || !title || !instruction || !duration || !difficulty || !cost) {
             return res
               .status(400)
-              .render('admin/recettes/detail', { error: 'ID et tous les champs obligatoires doivent être fournis.' });
+              .render('recipe-details', { error: 'ID et tous les champs obligatoires doivent être fournis.' });
           }
     
           await recipeDatamapper.updateRecipe({
@@ -254,7 +254,7 @@ const recipeAdminController ={
 
           });
     
-          res.redirect('/admin/recettes');
+          res.redirect('recipe');
         } catch (err) {
           next(err);
         }
@@ -266,7 +266,7 @@ const recipeAdminController ={
           if (!id) {
             return res
               .status(400)
-              .render('admin/recettes/index', { error: 'ID de la recette manquant.' });
+              .render('recipe', { error: 'ID de la recette manquant.' });
           }
     
           await recipeDatamapper.removeRecipe(id);

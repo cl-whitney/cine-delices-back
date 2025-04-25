@@ -17,6 +17,17 @@
                         </a>
                     </h3>
                     <p><img src="<%= recipe.image %>" alt="<%= recipe.title %>"></p>
+                        <form
+                        class="d-inline"
+                        action="/admin/recettes/<%= recipe.id %>/delete"
+                        method="POST"
+                        >
+                        <input
+                            class="btn btn-outline-danger py-0 px-1 ms-3 fs-6"
+                            type="submit"
+                            value="SUPPRIMER"
+                        >
+                        </form>
                 </li>
             <% }) %>
         </ul>

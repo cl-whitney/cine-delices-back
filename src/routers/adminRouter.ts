@@ -24,7 +24,7 @@ adminRouter.post('/recette', isAdmin, recipeAdminController.showRecipeForm)
 adminRouter.get('/recettes/:id', isAdmin,catchErrors(recipeAdminController.show))
 adminRouter.post('/recettes', isAdmin, catchErrors(recipeAdminController.store))
 adminRouter.patch('/recettes/:id', isAdmin, catchErrors(recipeAdminController.update))
-adminRouter.delete('recettes/:id', isAdmin, catchErrors(recipeAdminController.destroy))
+adminRouter.post('/recettes/:id/delete', isAdmin, catchErrors(recipeAdminController.destroy));
 
 
 // Gestion des utilisateurs
