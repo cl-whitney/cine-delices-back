@@ -1,0 +1,95 @@
+<%- include('partials/head') %>
+
+<main class="container py-4">
+  <h1 class="my-3">Modifier la recette</h1>
+
+  <form class="mb-5" action="/admin/recettes/<%= recipe.id %>" method="POST">
+    <!-- Titre -->
+    <label class="form-label" for="title">Titre actuel</label>
+    <input class="form-control mb-2" type="text" disabled value="<%= recipe.title %>">
+
+    <label class="form-label" for="title">Nouveau titre</label>
+    <input 
+      class="form-control mb-3" 
+      type="text" 
+      name="title" 
+      id="title" 
+      value="<%= formData.title %>" 
+      required
+    >
+
+    <!-- Image -->
+    <label class="form-label" for="image">URL de l’image actuelle</label>
+    <input class="form-control mb-2" type="url" disabled value="<%= recipe.image %>">
+
+    <label class="form-label" for="image">Nouvelle URL</label>
+    <input 
+      class="form-control mb-3" 
+      type="url" 
+      name="image" 
+      id="image" 
+      value="<%= formData.image %>"
+    >
+
+    <!-- Description -->
+    <label class="form-label" for="description">Description</label>
+    <textarea 
+      class="form-control mb-3" 
+      name="description" 
+      id="description" 
+      rows="3"
+    ><%= formData.description %></textarea>
+
+    <!-- Instruction -->
+    <label class="form-label" for="instruction">Instruction</label>
+    <textarea 
+      class="form-control mb-3" 
+      name="instruction" 
+      id="instruction" 
+      rows="3"
+      required
+    ><%= formData.instruction %></textarea>
+
+    <!-- Durée -->
+    <label class="form-label" for="duration">Durée</label>
+    <input 
+      class="form-control mb-3" 
+      type="text" 
+      name="duration" 
+      id="duration" 
+      value="<%= formData.duration %>" 
+      required
+    >
+
+    <!-- Difficulté -->
+    <label class="form-label" for="difficulty">Difficulté</label>
+    <select class="form-select mb-3" name="difficulty" id="difficulty">
+      <% ['Facile','Moyen','Difficile'].forEach(d => { %>
+        <option value="<%= d %>" <%= formData.difficulty===d ? 'selected' : '' %>><%= d %></option>
+      <% }) %>
+    </select>
+
+    <!-- Coût -->
+    <label class="form-label" for="cost">Coût</label>
+    <select class="form-select mb-4" name="cost" id="cost">
+      <% ['Petit budget','Rapport qualité prix','Couteux'].forEach(c => { %>
+        <option value="<%= c %>" <%= formData.cost===c ? 'selected' : '' %>><%= c %></option>
+      <% }) %>
+    </select>
+
+    <!-- Bouton -->
+    <input class="btn btn-primary" type="submit" value="Enregistrer les modifications">
+
+    <% if (errors && errors.length) { %>
+      <ul class="alert alert-danger mt-3">
+        <% errors.forEach(err => { %>
+          <li><%= err %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </form>
+
+  <a href="/admin/recettes" class="btn btn-secondary">← Retour à la liste</a>
+</main>
+
+<%- include('partials/foot') %>
