@@ -15,28 +15,32 @@ const userDatamapper = {
             return result.rows;
         },
 
-    async updateUser(data: {
+        async updateUser(data: {
             id: number;
             first_name: string;
             last_name: string;
-            updated_at?: Date;
-        }): Promise<User> {
+            updated_at?: string; 
+          }): Promise<User> {
             const query = {
-                text: `UPDATE "user" 
-                       SET first_name=$1, last_name=$2, updated_at=$3 
-                       WHERE id=$4
-                       RETURNING *`,
-                       values: [
-                        data.id,
-                        data.first_name,
-                        data.last_name,
-                        new Date().toISOString()
-                    ]
+              text: `
+                UPDATE "user"
+                SET first_name  = $1,
+                    last_name   = $2,
+                    updated_at  = $3
+                WHERE id = $4
+                RETURNING *;
+              `,
+              values: [
+                data.first_name,
+                data.last_name,
+                data.updated_at ?? new Date().toISOString(),
+                data.id,
+              ],
             };
-        
+          
             const result = await client.query<User>(query.text, query.values);
             return result.rows[0];
-        },
+          },
 
     async getUserByEmail(email: string): Promise<User>{
         const query = 'SELECT * FROM "user" WHERE email = $1 AND status = true';

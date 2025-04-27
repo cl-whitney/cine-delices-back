@@ -5,9 +5,9 @@ import isAuth from "../middlewares/isAuth";
 
 const UsersRouter = Router ()
 
-UsersRouter.get('/users', catchErrors(userController.index))
-UsersRouter.get('/users/:id', isAuth, catchErrors(userController.show))
-UsersRouter.patch('/users/:id', isAuth, catchErrors(userController.update))
-UsersRouter.delete('/users', isAuth, catchErrors(userController.destroy))
+UsersRouter.get('/', catchErrors(userController.index))
+UsersRouter.get('/:id', isAuth, catchErrors(userController.show))
+UsersRouter.put('/:id', isAuth, catchErrors(userController.update));
+UsersRouter.delete('/:id', isAuth, catchErrors(userController.destroy))
 
 export default UsersRouter

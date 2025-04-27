@@ -33,23 +33,29 @@ const userController = {
 
 
     // Mettre à jour un utilisateur
-    async update(req: Request, res: Response, _next: NextFunction): Promise<void> {
+    async update(req: Request, res: Response, next: NextFunction): Promise<void> {
         const id = Number(req.params.id);
-        const data = req.body;
-
+        const { first_name, last_name } = req.body;
+      
         if (!id) {
-            res.status(400).json({ error: "ID invalide." });
-            return;
+          res.status(400).json({ error: "ID invalide." });
+          return;
+        }
+      
+        const existing = await userDatamapper.getUserById(id);
+        if (!existing) {
+          return next();  
         }
 
-        const user = await userDatamapper.getUserById(id);
-        if (!user){
-            return _next();
-        }
-        await userDatamapper.updateUser(data);
-        res.status(200).json({ message: "Utilisateur mise à jour avec succès." })
-    },
+        const updatedUser = await userDatamapper.updateUser({
+          id,
+          first_name,
+          last_name,
+          updated_at: new Date().toISOString(),
+        });
 
+        res.status(200).json({ user: updatedUser });
+      },
     // Supprimer un utilisateur
     async destroy(req: Request, res: Response, _next: NextFunction): Promise<void> {
         const id = Number(req.params.id);
