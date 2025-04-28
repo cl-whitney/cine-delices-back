@@ -161,28 +161,36 @@ const recipeAdminController ={
       res.render("addRecipe", {
         formData,
         errors: [],
-        userId,            // ← on le passe dans le template
+        userId,           
       });
     },
 
-    async showEditRecipeForm(req: Request, res: Response, _next: NextFunction): Promise<void> {
-      const formData = {
-        title: "",
-        image: "",
-        description: "",
-        instruction: "",
-        duration: "",
-        difficulty: "",
-        cost: "",
-      };
-      const sessionUser = req.session.user as User;
-      const userId = sessionUser.id;
+    async showEditRecipeForm(req: Request, res: Response, next: NextFunction): Promise<void> {
+      try {
+        const id = Number(req.params.id);
+        const recipe = await recipeDatamapper.getRecipeById(id);
+        if (!recipe) {
+          return res.status(404).render('404');
+        }
+
+        const formData = {
+          title:       recipe.title,
+          image:       recipe.image,
+          description: recipe.description,
+          instruction: recipe.instruction,
+          duration:    recipe.duration,
+          difficulty:  recipe.difficulty,
+          cost:        recipe.cost,
+        };
   
-      res.render("editRecipe", {
-        formData,
-        errors: [],
-        userId,            // ← on le passe dans le template
-      });
+        res.render('editRecipe', {
+          recipe,
+          formData,
+          errors: [],
+        });
+      } catch (err) {
+        next(err);
+      }
     },
 
     async show(req: Request, res:Response, _next: NextFunction):Promise <void>{

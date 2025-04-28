@@ -29,13 +29,14 @@
                             action="/admin/recettes/<%= recipe.id %>/edit"
                             method="POST"
                         >
-                            <input
-                                class="btn btn-outline-primary py-0 px-1 ms-3 fs-6"
-                                type="submit"
-                                value="MODIFIER"
-                            >
+                        <button class="btn btn-outline-primary py-0 px-1 ms-3 fs-6">
                         </form>
-
+                        <a
+                        href="/admin/recettes/<%= recipe.id %>/edit"
+                        class="btn btn-outline-primary"
+                        >
+                        Modifier
+                    </a>
                     </div>
                 </li>
             <% }) %>

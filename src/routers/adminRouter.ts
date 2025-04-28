@@ -22,7 +22,7 @@ adminRouter.get('/recettes', isAdmin, recipeAdminController.index)
 adminRouter.get('/recette/formulaire', isAdmin, recipeAdminController.showRecipeForm)
 adminRouter.post('/recette', isAdmin, recipeAdminController.showRecipeForm)
 adminRouter.get('/recettes/:id', isAdmin,catchErrors(recipeAdminController.show))
-adminRouter.post('/recettes/:id/edit', isAdmin,catchErrors(recipeAdminController.showEditRecipeForm))
+adminRouter.get('/recettes/:id/edit', isAdmin,catchErrors(recipeAdminController.showEditRecipeForm))
 adminRouter.post('/recettes', isAdmin, catchErrors(recipeAdminController.store))
 adminRouter.patch('/recettes/:id', isAdmin, catchErrors(recipeAdminController.update))
 adminRouter.post('/recettes/:id/delete', isAdmin, catchErrors(recipeAdminController.destroy));
