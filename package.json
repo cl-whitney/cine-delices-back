@@ -15,7 +15,9 @@
     "create:db": "psql -h localhost -U cinedelices -d postgres -f data/create_db.sql",
     "seed:db": "psql -h localhost -U cinedelices -d cinedelices -f data/seed_db.sql",
     "update:user": "psql -h localhost -U cinedelices -d cinedelices -f data/seed_user_db.sql",
-    "reset:db": "npm run create:db && npm run seed:db && npm run update:user"
+    "reset:db": "npm run create:db && npm run seed:db && npm run update:user",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
