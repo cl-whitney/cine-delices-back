@@ -1,7 +1,8 @@
 BEGIN;
 
 -- Drops
-DROP TABLE IF EXISTS "category", "quantity", "ingredient", "media", "user";
+DROP TABLE IF EXISTS "category", "quantity", "ingredient", "media", "user" CASCADE;
+DROP TYPE IF EXISTS "user_role" CASCADE;
 DROP DOMAIN IF EXISTS "email";
 
 -- Regex pour le contrôle des emails utilisateurs 

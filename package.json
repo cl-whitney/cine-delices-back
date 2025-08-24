@@ -12,10 +12,12 @@
     "check": "pnpx @biomejs/biome check ./",
     "check:fix": "pnpx @biomejs/biome check --write ./",
     "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts",
-    "create:db": "psql -U cinedelices < data/create_db.sql",
-    "seed:db": "psql -U cinedelices < data/seed_db.sql",
-    "update:user": "psql -U cinedelices < data/seed-user.sql",
-    "reset:db": "npm run create:db && npm run seed:db && npm run update:user"
+    "create:db": "psql -h localhost -U cinedelices -d postgres -f data/create_db.sql",
+    "seed:db": "psql -h localhost -U cinedelices -d cinedelices -f data/seed_db.sql",
+    "update:user": "psql -h localhost -U cinedelices -d cinedelices -f data/seed_user_db.sql",
+    "reset:db": "npm run create:db && npm run seed:db && npm run update:user",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -41,8 +43,10 @@
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.14.1",
     "@types/pg": "^8.11.13",
+    "@types/supertest": "^6.0.3",
     "jest": "^29.7.0",
     "nodemon": "^3.1.9",
+    "supertest": "^7.1.4",
     "ts-jest": "^29.3.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"

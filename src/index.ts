@@ -89,3 +89,5 @@ app.listen(port, () => {
   // biome-ignore lint/suspicious/noConsole: <explanation>
   console.log(`Listening on ${base_url}:${port}`);
 });
+
+export default app;

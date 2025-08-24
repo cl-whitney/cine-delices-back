@@ -1,50 +1,42 @@
-name: deploy-cinedelices
+services:
+  - type: web
+    name: cine-delices-api
+    env: docker
+    plan: free
+    autoDeploy: true
 
-on:
-  push:
-    branches:
-      - main
+    healthCheckPath: "/"
 
-jobs:
-    build-and-test:
-        runs-on: unbuntu-latest
+    # dockerfilePath: ./Dockerfile   # décommente si ton Dockerfile n'est pas à la racine
 
-        steps:
-            - name: checkout
-              uses: actions/checkout@v4
-
-              # Setup pnpm
-            - name: Install pnpm
-              uses: pnpm/action-setup@v2
-              with:
-                version: 10
-                run_install: false
-
-            - name: Setup Node.js
-              uses: actions/setup-node@v2
-              with:
-                node-version: '20'
-                cache: 'pnpm'
-
-            - name: Install dependencies
-              run: pnpm install
-
-            - name: Setup Biome
-              uses: biome/biome-action@v1
-              with:
-                biome_version: 'latest'
-
-            - name: Run Biome
-              run: biome ci .
-
-            - name: Build
-              run: pnpm build
-
-            - name: Verify build
-              run: ls dist
-
-            - name: Setup Surge
-              run: npm install -g surge
-
-            - name: Deploy to Surge
-              run: surge ./dist ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: BASE_URL
+        sync: false
+      - key: PG_URL
+        sync: false
+      - key: PG_USER
+        sync: false
+      - key: PG_DB
+        sync: false
+      - key: PG_PWD
+        sync: false
+      - key: SECRET_KEY
+        sync: false
+      - key: ACCESS_TOKEN_TYPE
+        sync: false
+      - key: ACCESS_TOKEN_ALGORITHM
+        sync: false
+      - key: ACCESS_TOKEN_SECRET
+        sync: false
+      - key: ACCESS_TOKEN_EXPIRES_IN_MS
+        sync: false
+      - key: ACCESS_TOKEN_AUDIENCE
+        sync: false
+      - key: ACCESS_TOKEN_ISSUER
+        sync: false
+      - key: SESSION_SECRET
+        sync: false
